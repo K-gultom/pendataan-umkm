@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <div class="form-box">
-        <form class="form" method="POST">
+        <form class="form" method="POST" action="{{ url('/') }}">
             @csrf
             <span class="title">Login</span>
             {{-- <span class="subtitle">Silahkan Login Menggunakan Email dan Password yang telah Anda daftar</span>  --}}
@@ -14,11 +14,10 @@
                 <input type="email" name="email" class="input" placeholder="Email">
                 <input type="password" name="password" class="input" placeholder="Password">
             </div>
-            <button>Login</button>
+            <button type="submit">Login</button>
         </form>
         <div class="form-section">
           <p>Belum Punya Akun? <a href="{{ url('/register') }}">Register</a> </p>
-          <p>Anda <a href="{{ url('/login-pegawai') }}">Pegawai?</a> </p>
         </div>
     </div>
 </div>

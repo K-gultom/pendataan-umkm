@@ -6,18 +6,42 @@
 @section('content')
 <div class="container">
     <div class="form-box">
-        <form class="form">
+        <form class="form" action="{{ url('/register') }}" method="POST">
+            @csrf
             <span class="title">Register</span>
             <span class="subtitle">Buat Akun dengan Email Anda</span>
             <div class="form-container">
-              <input type="text" class="input" placeholder="Nama Lengkap">
-                    <input type="email" class="input" placeholder="Email">
-                    <input type="password" class="input" placeholder="Password">
+                <div class="div">
+                    <input value="{{old('name')}}" type="text" name="name" class="input @error('name') is-invalid @enderror" placeholder="Nama Lengkap">
+                    @error('name')
+                      <div class="invalid-feedback">
+                        {{$message}}
+                      </div>
+                    @endif
+                </div>
+
+                <div class="div">
+                    <input value="{{old('email')}}" type="email" name="email" class="input @error('email') is-invalid @enderror" placeholder="Email">
+                    @error('email')
+                      <div class="invalid-feedback">
+                        {{$message}}
+                      </div>
+                    @endif
+                </div>
+                <div class="div">
+                    <input type="password" name="password" class="input @error('password') is-invalid @enderror" placeholder="Password">
+                    @error('password')
+                      <div class="invalid-feedback">
+                        {{$message}}
+                      </div>
+                    @endif
+                </div>
+                <input type="text" name="level" value="user" hidden>
             </div>
-            <button>Daftar</button>
+            <button type="submit">Daftar</button>
         </form>
         <div class="form-section">
-          <p>Sudah punya akun? <a href="{{ url('/login') }}">Log in</a> </p>
+          <p>Sudah punya akun? <a href="{{ url('/') }}">Log in</a> </p>
         </div>
     </div>
 </div>
@@ -35,7 +59,7 @@
         border-radius: 16px;
         color: #010101;
     }
-    
+
     .form {
         position: relative;
         display: flex;

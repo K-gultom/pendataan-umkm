@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title')</title>
     <!-- Bootstrap Assets CSS -->
+
     <link rel="stylesheet" href="{{ url('assets/bootstrap5/css/bootstrap.min.css') }}">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     {{-- Bootstrap ICON --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="https://kit.fontawesome.com/f181524b5b.js" crossorigin="anonymous"></script>
 
     <style>
         body {
@@ -52,6 +55,9 @@
             padding: 10px;
             text-align: center;
         }
+        .foot{
+            margin-bottom: 195px;
+        }
     </style>
 </head>
 
@@ -60,18 +66,31 @@
     <div class="clr max-height-vh-100 min-vh-100 col-2">
         <nav class="nav flex-column">
             <div class="container mt-3">
-                <a class="head navbar-brand mt-3" href="#"> 
+                <a class="head navbar-brand mt-3" href="#">
                     <img src="{{ url('/assets/images/logo-kelurahan.png') }}" height="40">
                     Kelurahan 9 Ilir
                 </a>
                 <h3 class="head m-3"></h3>
             </div>
-            <a href="{{url('/dashboard')}}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
-            <a href="{{url('#')}}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu1</a>
-            <a href="{{url('#')}}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu2</a>
-            <a href="{{url('#')}}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu3</a>
-            <a href="{{url('#')}}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu4</a>
-        </nav> 
+          
+            {{-- <a href="{{ url('/umkm-dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a> --}}
+
+            <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
+          
+            <div class="nav-item dropdown">
+                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-people-fill"></i> Data Petugas
+                </a>
+                <div class="dropdown-menu mx-3">
+                    <a href="{{ url('/admin') }}" class="dropdown-item">Data Admin</a>
+                    <a href="{{ url('/rt') }}" class="dropdown-item">Data RT</a>
+                </div>
+            </div>
+
+            <a href="{{ url('#') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu3</a>
+            <a href="{{ url('#') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Menu4</a>
+        </nav>
+          
     </div>
 
     <div class="col">
@@ -83,15 +102,18 @@
                         Hai {{Auth()->user()->name}}
                     </a>  
                 </div>
-                <a href="{{url('/logout')}}" class="text-light" style="text-decoration: none;">Logout <i class="bi bi-box-arrow-right text-light ms-auto"></i></a>
+                <a href="{{url('/logout')}}" class="text-light" style="text-decoration: none;">
+                    Logout  <i class="fa-solid fa-power-off"></i>
+                    {{-- <i class="bi bi-box-arrow-right text-light ms-auto"></i> --}}
+                </a>
             </div>
             
         </nav>
 
-        <div class="mx-2 p-1">
+        <div class="mx-2 p-1 foot">
             @yield('content')
-            <div class="mb-5"></div>
         </div> 
+
         <footer class="text-center p-3">
             &copy; 2024 Kelurahan 9 Ilir - Pendataan UMKM Apps All rights reserved.
         </footer>
@@ -99,7 +121,8 @@
 </div>
 
 <!-- Bootstrap Bundle with Popper -->
-<script src="{{ url('assets/bootstrap5/js/bootstrap.min.js') }}"></script>
+<script src="{{ url('assets/bootstrap5/js/bootstrap.bundle.min.js') }}"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const toggleMenuBtn = document.getElementById('toggleMenuBtn');

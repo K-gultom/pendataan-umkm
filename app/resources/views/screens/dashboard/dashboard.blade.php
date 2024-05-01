@@ -20,6 +20,7 @@
             @endfor
             <!-- Add more cards here -->
         </div>
+
     </div>
 
     <style>

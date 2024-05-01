@@ -11,7 +11,7 @@ class AuthUMKM extends Controller
 {
     public function index()
     {
-        return view('auth.umkm.login-umkm');
+        return view('auth.blade.login-umkm');
     }
 
     public function login(Request $request)
@@ -29,23 +29,24 @@ class AuthUMKM extends Controller
         ];
 
         if (Auth::attempt($infoLogin)) {
-                return redirect('/dashboard');
+            return redirect('/dashboard');
+
+            // if ($user->level === 'user') {
+            //     return redirect('/user');
+            // } else if ($user->level === 'admin') {
+            //     return redirect('/admin');
+            // } 
+                
         }else{
             
             return redirect()->back()->withErrors(['password' => 'Password is Invalid']);
 
         }
-        // return view('auth.umkm.login-umkm');
     }
-
-    // public function getdashboard()
-    // {
-    //     return view('screens.dashboard.dashboard');
-    // }
 
     public function register()
     {
-        return view('auth.umkm.register-umkm');
+        return view('auth.blade.register-umkm');
     }
 
     public function register_store(Request $request)
@@ -65,4 +66,12 @@ class AuthUMKM extends Controller
 
         return redirect('/');
     }
+
+    function logout()
+    {
+
+        Auth::logout();
+        return redirect('/');
+    }
+
 }

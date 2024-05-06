@@ -55,10 +55,14 @@ class AdminRTController extends Controller
      * this is section rt
      * for logic all for rt
      */
-    function rt()
+    function rt(Request $r)
     {
         
-        $data = User::where('level', 'rt')->paginate(5);
+        $data = User::where('level', 'rt')
+        ->where('name','like',"%$r->search%")
+        ->orWhere('wilayah_rt','like',"%$r->search%")
+        ->orderBy('wilayah_rt', 'asc')
+        ->paginate(5);
         return view('screens.rt.rt', compact('data'));
     }
     function adminRT()

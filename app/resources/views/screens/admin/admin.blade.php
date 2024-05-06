@@ -6,10 +6,10 @@
 
 @section('content')
     <div class="container-fluid ">
-        <h4 class="mb-3">Data Pegawai</h4>
+        <h4 class="mb-3">Data Admin</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Data Pegawai</li>
+            <li class="breadcrumb-item active" aria-current="page">Data Admin</li>
             </ol>
         </nav>
 
@@ -17,7 +17,7 @@
             <div class="card-header"> 
                 <div class="d-flex">
                     <div class="w-100 pt-1"> 
-                        <strong>Data</strong> Pegawai
+                        <strong>Data</strong> Admin
                     </div>
                     <div class="w-100 text-end">
                         <a href="{{url('/admin/add')}}" class="btn btn-primary"> 
@@ -38,20 +38,6 @@
                         }, {{ session('timeout', 5000) }});
                     </script>
                 @endif
-
-                <div class="container">
-                    <div class="row m-5">
-                        <form action="{{url('#')}}">
-                            <label for="search" class="form-label"><strong>Cari Data</strong> Admin</label> <br> 
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Cari Nama ...">
-                                <button class="btn  btn-primary" type="submit">
-                                    <i class="bi bi-search"></i> Search
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
                 <table class="table table-hover">
                     <thead>
@@ -88,7 +74,7 @@
                             @endforeach
                     </tbody>
                 </table>
-                <a href="{{url('/admin')}}" class="btn btn-primary">Refresh Page</a>
+                {{-- <a href="{{url('/admin')}}" class="btn btn-primary">Refresh Page</a> --}}
                 {{$data->links()}}
             </div>
         </div> 

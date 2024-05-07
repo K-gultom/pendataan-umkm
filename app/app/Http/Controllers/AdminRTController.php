@@ -17,6 +17,7 @@ class AdminRTController extends Controller
 
         $data = User::where('level', 'admin')->paginate(5);
         return view('screens.admin.admin', compact('data'));
+        
     }
 
     function adminadd()

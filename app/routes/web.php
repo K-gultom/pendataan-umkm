@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminRTController;
 use App\Http\Controllers\AuthUMKM;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\UserUMKMController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', [firstController::class, 'index']);
@@ -64,4 +65,14 @@ Route::middleware(['auth:','ceklevel:admin,user,rt'])->group(function () {
         Route::post('/umkm/kategori/edit/{id}', [UmkmController::class, 'kategori_UMKM_edit_store']);
 
         Route::get('/umkm/kategori/del/{id}', [UmkmController::class, 'kategori_UMKM_del']);
+
+
+    //SECTION USER ROUTING
+        Route::get('/dashboard/umkm', [UserUMKMController::class, 'index']);
+
+        Route::get('/kelengkapan', [UserUMKMController::class, 'kelengkapan']);
+        Route::post('/kelengkapan', [UserUMKMController::class, 'kelengkapan_store']);
+
+        Route::get('/kelengkapann/{id}', [UserUMKMController::class, 'update']);
+        Route::post('/kelengkapann/{id}', [UserUMKMController::class, 'update_proses']);
 });

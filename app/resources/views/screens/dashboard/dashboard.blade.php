@@ -6,6 +6,13 @@
 
 @section('content')
     <div class="container mt-5">
+        <h4 class="mb-3">Dashboard</h4>
+        <nav aria-label="breadcrumb" class="mb-1">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
+        
         <div class="row">
             @for ($a = 0; $a < 4; $a++)
                 <div class="col-lg-3 col-md-6 mb-4">

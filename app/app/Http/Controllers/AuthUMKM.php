@@ -29,13 +29,21 @@ class AuthUMKM extends Controller
         ];
 
         if (Auth::attempt($infoLogin)) {
-            return redirect('/dashboard');
+            // return redirect('/dashboard');
 
-            // if ($user->level === 'user') {
-            //     return redirect('/user');
-            // } else if ($user->level === 'admin') {
-            //     return redirect('/admin');
-            // } 
+            if ($user->level === 'admin') {
+
+                return redirect('/dashboard');
+
+            } else if ($user->level === 'rt') {
+
+                return redirect('/dashboard');
+
+            } else if ($user->level === 'user') {
+
+                return redirect('/dashboard/umkm');
+                
+            } 
                 
         }else{
             

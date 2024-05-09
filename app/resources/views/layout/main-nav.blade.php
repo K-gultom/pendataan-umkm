@@ -79,32 +79,38 @@
           
             {{-- <a href="{{ url('/umkm-dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a> --}}
 
-            <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
+            
+            @if (Auth::user()->level == 'admin' || Auth::user()->level == 'rt')
+                <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
 
-            <div class="nav-item dropdown">
-                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> Data Petugas
-                </a>
-                <div class="dropdown-menu mx-3">
-                    <a href="{{ url('/admin') }}" class="dropdown-item dropHover">Data Admin</a>
-                    <a href="{{ url('/rt') }}" class="dropdown-item dropHover">Data RT</a>
+                <div class="nav-item dropdown">
+                    <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people-fill"></i> Data Petugas
+                    </a>
+                    <div class="dropdown-menu mx-3">
+                        <a href="{{ url('/admin') }}" class="dropdown-item dropHover">Data Admin</a>
+                        <a href="{{ url('/rt') }}" class="dropdown-item dropHover">Data RT</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="nav-item dropdown">
-                <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-people-fill"></i> UMKM
-                </a>
-                <div class="dropdown-menu mx-3">
-                    <a href="{{ url('/umkm/jenis') }}" class="dropdown-item dropHover">Jenis UMKM</a>
-                    <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
+                <div class="nav-item dropdown">
+                    <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people-fill"></i> UMKM
+                    </a>
+                    <div class="dropdown-menu mx-3">
+                        <a href="{{ url('/umkm/jenis') }}" class="dropdown-item dropHover">Jenis UMKM</a>
+                        <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
+                    </div>
                 </div>
-            </div>
+                
+                <a href="{{ url('#') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Data UMKM</a>
+            @endif
 
-            <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard UMKM</a>
-            <a href="{{ url('/kelengkapan') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Kelengkapan</a>
+            @if (Auth::user()->level == 'user')
+                <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard UMKM</a>
+                <a href="{{ url('/kelengkapan') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Kelengkapan</a>
+            @endif
           
-            <a href="{{ url('#') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Data UMKM</a>
         </nav>
           
     </div>

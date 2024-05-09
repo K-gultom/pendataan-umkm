@@ -93,6 +93,6 @@ class AdminRTController extends Controller
         $new->level         = $req->level;
         $new->save();
 
-        return redirect('/rt')->with('message', 'Tambah data admin berhasil');
+        return redirect('/rt')->with('message', 'Tambah data RT berhasil');
     }
 }

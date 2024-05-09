@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container-fluid">
         <h4 class="mb-3">Dashboard</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">

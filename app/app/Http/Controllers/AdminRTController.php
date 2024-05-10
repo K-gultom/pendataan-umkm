@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\umkm;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminRTController extends Controller
@@ -56,6 +58,27 @@ class AdminRTController extends Controller
      * this is section rt
      * for logic all for rt
      */
+
+     public function dashboardRt() {
+
+        // Get the logged-in RT ID
+        $rtId = Auth::user()->id;
+      
+        // Count approved UMKM for the current RT
+        $approvedCount = Umkm::where('status', 'Disetujui')
+          ->where('rt_id', $rtId)
+          ->count();
+      
+        // Count disapproved UMKM for the current RT
+        $disapprovedCount = Umkm::where('status', 'Tidak Disetujui')
+          ->where('rt_id', $rtId)
+          ->count();
+      
+        // Pass the counts to the view
+        return view('screens.rt.dashboardRt', compact('approvedCount', 'disapprovedCount'));
+      }
+      
+
     function rt(Request $r)
     {
         
@@ -95,4 +118,46 @@ class AdminRTController extends Controller
 
         return redirect('/rt')->with('message', 'Tambah data RT berhasil');
     }
+
+    public function dataUmkm(){
+
+        $getApprove = umkm::where('rt_id', Auth::user()->id)
+        ->with('getRT', 'getKategori')->paginate(10);
+      
+        // dd($getApprove);
+        return view('screens.rt.cekUmkm.dataUmkm', compact('getApprove'));
+        
+    }
+
+    public function dataUmkm_save(Request $req){
+
+        $req->validate([
+            "status" => 'required',
+            "id" => 'required|integer',
+        ]);
+
+        $getId = $req->id;
+
+        // dd($req);
+        $new = umkm::findOrFail($getId);
+        $new -> status = $req -> status;
+        $new->save();
+
+        return redirect('rt/umkm')->with('message', 'Status Berhasil Diubah!!!');
+
+    }
+
+    public function Disetujui(){
+
+        $getApprove = umkm::where('status', 'Disetujui')
+        ->where('rt_id', Auth::user()->id)
+        ->with('getRT', 'getKategori')->paginate(10);
+      
+        // dd($getApprove);
+        return view('screens.rt.cekUmkm.disetujui', compact('getApprove'));
+        
+    }
+
+
+
 }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('nama_usaha');
             $table->string('alamat_usaha');
             $table->string('telp');
-            $table->enum('status', ['iya', 'tidak'])->nullable();
+            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Sedang Ditinjau'])->nullable();
             $table->timestamps();
         });
     }

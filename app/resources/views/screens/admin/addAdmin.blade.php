@@ -52,23 +52,23 @@
                           </div>
                     </div>
                     <div class="col">
-                        <div class="form-outline">
-                            <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
-                            <div class="input-group">
-                                <select  value="{{old('jenis_kelamin')}}" name="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror" id="">
-                                    <option value="">Pilih Jenis Kelamin</option> 
-                                    <option value="L">Laki-Laki</option>
-                                    <option value="P">Perempuan</option>
-                                  </select>
-                                  <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
-                            </div>
-                              @error('jenis_kelamin')
-                                <div class="invalid-feedback">
-                                  {{$message}}
-                                </div>
-                              @endif
+                      <div class="form-outline">
+                          <label class="form-label" for="jenis_kelamin">Jenis Kelamin</label>
+                          <div class="input-group">
+                            <select value="{{ old('jenis_kelamin') ?? '' }}" name="jenis_kelamin" class="form-control @error('jenis_kelamin') is-invalid @enderror" id="">
+                              <option value="">Pilih Jenis Kelamin</option>
+                              <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                              <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                            <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
                           </div>
-                    </div>
+                          @error('jenis_kelamin')
+                            <div class="invalid-feedback">
+                              {{$message}}
+                            </div>
+                          @enderror
+                      </div>
+                  </div>
                 </div>
 
                 <div class="row">

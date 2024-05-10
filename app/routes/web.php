@@ -40,9 +40,20 @@ Route::middleware(['auth:','ceklevel:admin,user,rt'])->group(function () {
     //SECTION RT ROUTING
         Route::get('/rt', [AdminRTController::class, 'rt']);
 
+        Route::get('/dashboard/rt', [AdminRTController::class, 'dashboardRt']);
+        
         //Add Data
         Route::get('/rt/add', [AdminRTController::class, 'adminRT']);
         Route::post('/rt/add', [AdminRTController::class, 'adminRT_Store']);
+
+        // DATA UMKM ALL
+        Route::get('/rt/umkm', [AdminRTController::class, 'dataUmkm']);
+        Route::post('/rt/umkm', [AdminRTController::class, 'dataUmkm_save']);
+
+        //Disetujui
+        Route::get('/rt/Umkm', [AdminRTController::class, 'Disetujui']);
+
+        
 
     //SECTION USER ROUTING
 
@@ -70,9 +81,15 @@ Route::middleware(['auth:','ceklevel:admin,user,rt'])->group(function () {
     //SECTION USER ROUTING
         Route::get('/dashboard/umkm', [UserUMKMController::class, 'index']);
 
-        Route::get('/kelengkapan', [UserUMKMController::class, 'kelengkapan']);
-        Route::post('/kelengkapan', [UserUMKMController::class, 'kelengkapan_store']);
+        Route::get('/umkm/data', [UserUMKMController::class, 'myUmkm']);
 
-        Route::get('/kelengkapann/{id}', [UserUMKMController::class, 'update']);
-        Route::post('/kelengkapann/{id}', [UserUMKMController::class, 'update_proses']);
+        Route::get('/umkm/add', [UserUMKMController::class, 'addData']);
+        Route::post('/umkm/add', [UserUMKMController::class, 'addData_save']);
+
+
+        Route::get('/umkm/edit/{id}', [UserUMKMController::class, 'edit']);
+        Route::post('/umkm/edit/{id}', [UserUMKMController::class, 'edit_save']);
+
+        Route::get('/umkm/del/{id}', [UserUMKMController::class, 'hapus']);
+
 });

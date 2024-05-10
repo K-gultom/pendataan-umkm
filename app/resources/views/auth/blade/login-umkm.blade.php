@@ -71,7 +71,7 @@
         overflow: hidden;
         border-radius: 8px;
         background-color: #fff;
-        margin: 1rem 0 .5rem;
+        /* margin: 1rem 0 .5rem; */
         width: 100%;
     }
 

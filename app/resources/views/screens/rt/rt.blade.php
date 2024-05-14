@@ -44,7 +44,7 @@
                         <form action="{{url('#')}}">
                             <label for="search" class="form-label"><strong>Cari Data</strong> RT</label> <br> 
                             <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Cari Nama ...">
+                                <input type="text" class="form-control" name="search" placeholder="Cari Nama ... / Wilayah RT">
                                 <button class="btn  btn-primary" type="submit">
                                     <i class="bi bi-search"></i> Search
                                 </button>
@@ -57,10 +57,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Wilayah RT</th>
                             <th>Nama</th>
                             <th>Email</th>
                             <th>No Telp</th>
-                            <th>Wilayah RT</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -70,10 +70,10 @@
                                 <td>
                                     {{ (($data->currentPage() - 1) * $data->perPage()) + $loop->iteration }} 
                                 </td>
+                                <td>{{$item->wilayah_rt}} </td>
                                 <td>{{$item->name}} </td>
                                 <td>{{$item->email}} </td>
                                 <td>{{$item->telp}} </td>
-                                <td>{{$item->wilayah_rt}} </td>
                                 <td class="text-center">
                                     <a href="" class="btn btn-success btn-sm">
                                         <i class="bi bi-eye"></i> Lihat Data

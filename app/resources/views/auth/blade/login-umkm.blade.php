@@ -9,10 +9,20 @@
         <form class="form" method="POST" action="{{ url('/') }}">
             @csrf
             <span class="title">Login</span>
-            {{-- <span class="subtitle">Silahkan Login Menggunakan Email dan Password yang telah Anda daftar</span>  --}}
+            <span class="subtitle">Silahkan Login Menggunakan Email dan Password yang telah Anda daftar</span> 
             <div class="form-container">
-                <input type="email" name="email" class="input" placeholder="Email">
-                <input type="password" name="password" class="input" placeholder="Password">
+                <input type="email" name="email" class="input @error('email') is-invalid @enderror" placeholder="Email">
+                @error('email')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @endif               
+                <input type="password" name="password" class="input @error('password') is-invalid @enderror" placeholder="Password">
+                @error('password')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                @endif      
             </div>
             <button type="submit">Login</button>
         </form>
@@ -61,7 +71,7 @@
         overflow: hidden;
         border-radius: 8px;
         background-color: #fff;
-        margin: 1rem 0 .5rem;
+        /* margin: 1rem 0 .5rem; */
         width: 100%;
     }
 

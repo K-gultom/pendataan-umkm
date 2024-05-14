@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminRTController;
+use App\Http\Controllers\UserUMKMController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/view/{id}', [UserUMKMController::class, 'view_modal']);
+
+Route::get('/view/umkm/{id}', [AdminRTController::class, 'view_modal_Rt']);
+Route::post('/update/umkm', [AdminRTController::class, 'update_umkm']);
+
+// Route::get('/view/form/{id}', [AdminRTController::class, 'view_form']);
+

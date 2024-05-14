@@ -15,30 +15,36 @@
         
         <div class="row">
             {{-- @for ($a = 0; $a < 4; $a++) --}}
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">{{ $approvedCount }}</h3>
                             <p class="card-text">UMKM Disetujui</p>
-                            <a href="#" class="btn btn-more-info">More info <i class="fas fa-arrow-circle-right ms-2"></i></a>
+                            <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#umkmDisetujui">
+                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">{{ $disapprovedCount }}</h3>
                             <p class="card-text">UMKM Tidak Disetujui</p>
-                            <a href="#" class="btn btn-more-info">More info <i class="fas fa-arrow-circle-right ms-2"></i></a>
+                            <a href="#" class="btn btn-more-info"  data-bs-toggle="modal" data-bs-target="#umkmTidakdisetujui">
+                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">{{ $approvedCount }}</h3>
-                            <p class="card-text">Jumlah UMKM</p>
-                            <a href="#" class="btn btn-more-info">More info <i class="fas fa-arrow-circle-right ms-2"></i></a>
+                            <p class="card-text">Jumlah UMKM Terdaftar</p>
+                            <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#JumlahSeluruhUMKM">
+                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -83,4 +89,64 @@
             background-color: #0056b3;
         }
     </style>
+
+    {{-- UMKM YANG DISETUJUI --}}
+    <div class="section1">
+        <div class="modal fade" id="umkmDisetujui" tabindex="-1" aria-labelledby="umkmDisetujuiLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="umkmDisetujuiLabel">Jumlah UMKM Disetujui</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Jumlah UMKM Yang Disetujui di wilah RT Anda Adalah <strong>{{ $approvedCount }}</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- UMKM YANG TIDAK DISETJUI --}}
+    <div class="section2">
+        <div class="modal fade" id="umkmTidakdisetujui" tabindex="-1" aria-labelledby="umkmTidakdisetujuiLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="umkmTidakdisetujuiLabel">Jumlah UMKM Tidak Disetujui</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Jumlah UMKM Yang Disetujui di wilah RT Anda Adalah <strong>{{ $disapprovedCount }}</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- JUMLAH KESELURUHAN UMKM --}}
+    <div class="section3">
+        <div class="modal fade" id="JumlahSeluruhUMKM" tabindex="-1" aria-labelledby="JumlahSeluruhUMKMLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="JumlahSeluruhUMKMLabel">Jumlah Seluruh UMKM</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Jumlah Seluruh Yang Terdaftar UMKM <strong>{{ $approvedCount }}</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -61,26 +61,21 @@ class AdminRTController extends Controller
 
      public function dashboardRt() {
 
-        // Get the logged-in RT ID
         $rtId = Auth::user()->id;
-      
-        // Count approved UMKM for the current RT
+        
         $approvedCount = Umkm::where('status', 'Disetujui')
           ->where('rt_id', $rtId)
           ->count();
       
-        // Count disapproved UMKM for the current RT
         $disapprovedCount = Umkm::where('status', 'Tidak Disetujui')
           ->where('rt_id', $rtId)
           ->count();
-      
-        // Pass the counts to the view
+
         return view('screens.rt.dashboardRt', compact('approvedCount', 'disapprovedCount'));
-      }
+    }
       
 
-    function rt(Request $r)
-    {
+    function rt(Request $r){
         
         $data = User::where('level', 'rt')
         ->where('name','like',"%$r->search%")
@@ -89,12 +84,12 @@ class AdminRTController extends Controller
         ->paginate(5);
         return view('screens.rt.rt', compact('data'));
     }
-    function adminRT()
-    {
+
+    function adminRT(){
         return view('screens.rt.addRT');
     }
-    function adminRT_Store(Request $req)
-    {
+
+    function adminRT_Store(Request $req){
         $req->validate([
             "name"  => 'required|max:50',
             "wilayah_rt" => 'required|max:4|numeric|unique:users,wilayah_rt',
@@ -119,44 +114,104 @@ class AdminRTController extends Controller
         return redirect('/rt')->with('message', 'Tambah data RT berhasil');
     }
 
-    public function dataUmkm(){
+    public function dataUmkm(Request $r) {
+        $dataUmkm = umkm::where('rt_id', Auth::user()->id)
+            ->where('name', 'like', "%{$r->search}%")
+            ->with('getRT', 'getKategori')->paginate(10);
+    
 
-        $getApprove = umkm::where('rt_id', Auth::user()->id)
-        ->with('getRT', 'getKategori')->paginate(10);
-      
-        // dd($getApprove);
-        return view('screens.rt.cekUmkm.dataUmkm', compact('getApprove'));
-        
+        $getApproveStatus = null;
+        foreach (umkm::all() as $umkm) {
+            if ($umkm->status === 'Disetujui' || $umkm->status === 'Tidak Disetujui' || $umkm->status === 'Sedang Ditinjau') {
+                $getApproveStatus = $umkm->status;
+                break;
+            }
+        }
+    
+        if ($getApproveStatus === 'Disetujui') {
+
+            $getApprove = umkm::where('status', 'Disetujui')
+                ->where('rt_id', Auth::user()->id)
+                ->where('name', 'like', "%{$r->search}%")
+                ->with('getRT', 'getKategori')->paginate(10);
+
+                // dd($getApprove);
+
+        } else if ($getApproveStatus === 'Tidak Disetujui') {
+
+            $getApprove = umkm::where('status', 'Tidak Disetujui')
+                ->where('rt_id', Auth::user()->id)
+                ->where('name', 'like', "%{$r->search}%")
+                ->with('getRT', 'getKategori')->paginate(10);
+
+                // dd($getApprove);
+        } else{
+
+            $getApprove = umkm::where('status', 'Sedang Ditinjau')
+                ->where('rt_id', Auth::user()->id)
+                ->where('name', 'like', "%{$r->search}%")
+                ->with('getRT', 'getKategori')->paginate(10);
+
+                // dd($getApprove);
+        }
+    
+        return view('screens.rt.cekUmkm.dataUmkm', compact('dataUmkm', 'getApprove'));
     }
+    
+      
+    // API
+    public function view_modal_Rt($id) {
+        $getApproveStatus = umkm::with('getRT', 'getKategori', 'getJenis')
+        ->find($id);
 
-    public function dataUmkm_save(Request $req){
-
-        $req->validate([
-            "status" => 'required',
-            "id" => 'required|integer',
+        return response()->json([
+            'status' => true,
+            'message' => 'success',
+            'data' => $getApproveStatus
         ]);
-
-        $getId = $req->id;
-
-        // dd($req);
-        $new = umkm::findOrFail($getId);
-        $new -> status = $req -> status;
-        $new->save();
-
-        return redirect('rt/umkm')->with('message', 'Status Berhasil Diubah!!!');
-
     }
 
-    public function Disetujui(){
+    // API
+    public function update_umkm(Request $request){
+        $id = $request->input('id');
+        $status = $request->input('status');
 
-        $getApprove = umkm::where('status', 'Disetujui')
-        ->where('rt_id', Auth::user()->id)
-        ->with('getRT', 'getKategori')->paginate(10);
-      
-        // dd($getApprove);
-        return view('screens.rt.cekUmkm.disetujui', compact('getApprove'));
-        
+        $umkm = Umkm::find($id);
+        if ($umkm) {
+            $umkm->status = $status;
+            $umkm->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Status UMKM Berhasil Diperbaharui!!!'
+            ]);
+
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'UMKM not found'
+            ]);
+        }
     }
+
+    
+    // public function dataUmkm_save(Request $req){
+
+    //     $req->validate([
+    //         "status" => 'required',
+    //         "id" => 'required|integer',
+    //     ]);
+
+    //     $getId = $req->id;
+
+    //     // dd($req);
+    //     $new = umkm::findOrFail($getId);
+    //     $new -> status = $req -> status;
+    //     $new->save();
+
+    //     return redirect('rt/umkm')->with('message', 'Status Berhasil Diubah!!!');
+
+    // }
 
 
 

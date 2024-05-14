@@ -19,20 +19,28 @@ class UserUMKMController extends Controller
     public function myUmkm() {
         
         $getUmkm = umkm::with('getRT', 'getKategori')->where('user_id', Auth::user()->id)->get();
-      
+        
         if ($getUmkm->isEmpty()) {
 
           $noDataMessage = 'Maaf, Anda belum memiliki data UMKM apapun!!!';
-          return view('screens.user.myUmkm', compact('noDataMessage', 'getUmkm'));
+          return view('screens.user.myUmkm', compact('noDataMessage', 'getUmkm', ));
 
         } else {
-            
           return view('screens.user.myUmkm', compact('getUmkm'));
 
         }
 
     }
-      
+
+    public function view_modal($id) {
+        $getUMKM = umkm::with('getRT', 'getKategori', 'getJenis')->find($id);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'success',
+            'data' => $getUMKM
+        ]);
+    }
     
     public function addData(){
 
@@ -77,8 +85,6 @@ class UserUMKMController extends Controller
         return redirect('/umkm/data')->with('message', 'Data Berhasil diSimpan!!!');
 
     }
-    
-
 
     public function edit(){
 
@@ -113,7 +119,7 @@ class UserUMKMController extends Controller
             'nama_usaha' => 'required|min:3|max:50',
             'alamat_usaha' => 'required|min:5|max:100',
             'telp' => 'required|max:15',
-            'status' => 'nullable'
+            // 'status' => 'nullable'
         ]);
 
         // dd($req->all());

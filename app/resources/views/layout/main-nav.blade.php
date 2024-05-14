@@ -81,7 +81,7 @@
             {{-- <a href="{{ url('/umkm-dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a> --}}
 
             
-            {{-- @if (Auth::user()->level == 'admin' || Auth::user()->level == 'rt') --}}
+            @if (Auth::user()->level == 'admin')
                 <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard ADMIN</a>
 
                 <div class="nav-item dropdown">
@@ -103,26 +103,18 @@
                         <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
                     </div>
                 </div>
+            @endif
+
+            @if (Auth::user()->level == 'rt')
+                <a href="{{ url('/dashboard/rt') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
+                <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Data UMKM</a>
+            @endif
                 
-                <a href="{{ url('/dashboard/rt') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard RT</a>
-                {{-- <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Data UMKM</a> --}}
-                <div class="nav-item dropdown">
-                    <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-people-fill"></i> Data UMKM
-                    </a>
-                    <div class="dropdown-menu mx-3">
-                        <a href="{{ url('/rt/umkm') }}" class="dropdown-item dropHover">Data UMKM</a>
-                        <a href="{{ url('/rt/Umkm') }}" class="dropdown-item dropHover">Data Disetujui</a>
-                        <a href="{{ url('/rt/UmkM') }}" class="dropdown-item dropHover">Data Tidak Disetujui</a>
-                    </div>
-                </div>
 
-            {{-- @endif --}}
-
-            {{-- @if (Auth::user()->level == 'user') --}}
-                <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard UMKM USER</a>
+            @if (Auth::user()->level == 'user')
+                <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
                 <a href="{{ url('/umkm/data') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> UMKM Saya</a>
-            {{-- @endif --}}
+            @endif
           
         </nav>
           

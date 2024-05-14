@@ -59,18 +59,14 @@
                         @foreach ($getUmkm as $item)
                                 <tr>
                                     <td>
-                                        {{-- {{ (($data->currentPage() - 1) * $data->perPage()) + $loop->iteration }}  --}}
                                         {{ $loop->iteration }} 
                                     </td>
                                     <td>{{$item->nama_usaha}} </td>
                                     <td class="text-center">{{$item->getRT->wilayah_rt}} </td>
                                     <td class="text-center">{{$item->getKategori->nama_kategori}} </td>
                                     <td class="text-center">
-                                        <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#lihatdata">
+                                        <a id="viewModal" href="" data-id="{{ $item->id }}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#lihatdata">
                                             <i class="bi bi-eye"></i> Lihat Data
-                                        </a>
-                                        <a href="{{url('/umkm/edit')}}/{{$item->id}} " class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil"></i> Edit
                                         </a>
                                         <a href="{{url('/umkm/del')}}/{{ $item->id }}" class="btn btn-danger btn-sm" 
                                             onclick="return confirm('Hapus Data ???');">
@@ -82,7 +78,7 @@
                     </tbody>
                 </table>
                 {{-- <a href="{{url('/admin')}}" class="btn btn-primary">Refresh Page</a> --}}
-                {{-- {{$data->links()}} --}}
+                {{-- {{$item->links()}} --}}
             </div>
         </div> 
     </div>
@@ -92,42 +88,23 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        @foreach ($getUmkm as $item)
-                            <h1 class="modal-title fs-5" id="lihatdataLabel">Data UMKM --- {{ $item->nama_usaha }}</h1>
-                        @endforeach
+                        <h1 class="modal-title fs-5" id="lihatdataLabel">Data UMKM --- <span id="namaUsaha"></span></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        @foreach ($getUmkm as $item)
-                            <p>Nama Pemilik UMKM : <strong>{{ $item->name }}</strong> </p>
-                            <p>Nomor Induk Kependudukan : <strong>{{ $item->nik }}</strong> </p>
-                            <p>Alamat Pemilik: <strong>{{ $item ->alamat_pemilik}}</strong> </p>
-                            <p>RT : <strong>{{ $item->getRT->wilayah_rt}}</strong> </p>
-                            <p>Jenis UMKM : <strong>{{ $item->getJenis->jenis_umkm}}</strong> </p>
-                            <p>Kategori UMKM : <strong>{{ $item->getKategori->nama_kategori}}</strong> </p>
-                            <p>Nama Usaha : <strong>{{ $item->nama_usaha}}</strong> </p>
-                            <p>Alamat Usaha : <strong>{{ $item->alamat_usaha}}</strong> </p>
-                            <p>No. Telepon : <strong>{{ $item->telp}}</strong> </p>
-                            <p> Status UMKM: 
-                                <span class="badge rounded-pill 
-                                    @switch($item->status)
-                                    @case('Sedang Ditinjau')
-                                        bg-warning text-dark
-                                        @break
-                                    @case('Disetujui')
-                                        bg-success text-white
-                                        @break
-                                    @case('Tidak Disetujui')
-                                        bg-danger text-white
-                                        @break
-                                    @default
-                                        bg-light text-dark
-                                    @endswitch
-                                ">
-                                  {{$item->status}}
-                                </span>
+                        {{-- @foreach ($getUmkm as $item) --}}
+                            <p>Nama Pemilik UMKM : <strong id="nama"></strong> </p>
+                            <p>Nomor Induk Kependudukan : <strong id="nik"></strong> </p>
+                            <p>Alamat Pemilik: <strong id="alamat"></strong> </p>
+                            <p>RT : <strong id="rt"></strong> </p>
+                            <p>Jenis UMKM : <strong id="jenis"></strong> </p>
+                            <p>Kategori UMKM : <strong id="namaKategori"></strong> </p>
+                            <p>Nama Usaha : <strong id="namaUsahaBody"></strong> </p>
+                            <p >Alamat Usaha : <strong id="alamatUsaha"></strong> </p>
+                            <p >No. Telepon : <strong id="telp"></strong> </p>
+                            <p> Status UMKM: <span id="statusContainer"></span>
                             </p>
-                        @endforeach
+                        {{-- @endforeach --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -137,4 +114,38 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const viewModal = document.querySelector('#lihatdata');
+
+        viewModal.addEventListener('show.bs.modal', (e) => {
+            let button = event.relatedTarget
+            let id = button.getAttribute('data-id')
+            
+            fetch('/api/view/' + id).then(response => response.json()).then(data => {
+                console.log(data);
+                document.getElementById('nama').textContent  = data.data.name;
+                document.getElementById('nik').textContent  = data.data.nik;
+                document.getElementById('alamat').textContent  = data.data.alamat_pemilik;
+                document.getElementById('rt').textContent  = data.data.get_r_t.wilayah_rt;
+                document.getElementById('jenis').textContent  = data.data.get_jenis.jenis_umkm;
+                document.getElementById('namaKategori').textContent  = data.data.get_kategori.nama_kategori;
+                document.getElementById('namaUsaha').textContent  = data.data.nama_usaha;
+                document.getElementById('namaUsahaBody').textContent  = data.data.nama_usaha;
+                document.getElementById('alamatUsaha').textContent  = data.data.alamat_usaha;
+                document.getElementById('telp').textContent  = data.data.telp;
+                document.getElementById('statusContainer').innerHTML  = `
+                    <span id="status" class="badge rounded-pill
+                        ${(data.data.status == 'Disetujui') && 'bg-success text-white'}
+                        ${(data.data.status == 'Sedang Ditinjau') && 'bg-warning text-dark'}
+                        ${(data.data.status == 'Tidak Disetujui') && 'bg-danger text-white'}
+                        
+                        
+                        ">
+                          ${data.data.status}
+                    </span>
+                `;
+            })
+        })
+    </script>
 @endsection

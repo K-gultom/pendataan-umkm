@@ -6,12 +6,26 @@
 
 @section('content')
     <div class="container-fluid ">
-        <h4 class="mb-3">Data UMKM</h4>
+        <h4 class="mb-3">Data UMKM Disetujui</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Data UMKM</li>
+            <li class="breadcrumb-item active" aria-current="page">Data UMKM Disetujui</li>
             </ol>
         </nav>
+
+        <div class="container">
+            <div class="row m-5">
+                <form action="{{url('#')}}">
+                    <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label> <br> 
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Nama ... / Wilayah RT">
+                        <button class="btn  btn-primary" type="submit">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <div class="card">
             <div class="card-header"> 
@@ -26,6 +40,8 @@
                     </div>
                 </div>
             </div>
+
+            
 
             <div class="card-body">
                 @if(session('message'))
@@ -70,8 +86,8 @@
                                     <td class="text-center">{{$item->getKategori->nama_kategori}} </td>
                                     <td class="text-center">{{$item->getRT->wilayah_rt}} </td>
                                     <td class="text-center">
-                                        <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#lihatdata">
-                                            <i class="bi bi-eye"></i> Lihat Status UMKM
+                                        <a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
+                                            <i class="bi bi-eye"></i> Status UMKM
                                         </a>
                                     </td>
                                 </tr>   
@@ -84,14 +100,14 @@
         </div> 
     </div>
 
-
+{{-- STATUS UMKM SEKARANG --}}
     <div class="section">
-        <div class="modal fade" id="lihatdata" tabindex="-1" aria-labelledby="lihatdataLabel" aria-hidden="true">
+        <div class="modal fade" id="statusUmkm" tabindex="-1" aria-labelledby="statusUmkmLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         @foreach ($getApprove as $item)
-                            <h1 class="modal-title fs-5" id="lihatdataLabel">Data UMKM --- {{ $item->nama_usaha }}</h1>
+                            <h1 class="modal-title fs-5" id="statusUmkmLabel">Data UMKM --- {{ $item->nama_usaha }}</h1>
                         @endforeach
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -129,5 +145,7 @@
             </div>
         </div>
     </div>
+
+    
 @endsection
 

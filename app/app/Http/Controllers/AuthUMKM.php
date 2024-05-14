@@ -29,7 +29,6 @@ class AuthUMKM extends Controller
         ];
 
         if (Auth::attempt($infoLogin)) {
-            // return redirect('/dashboard');
 
             if ($user->level === 'admin') {
 
@@ -37,7 +36,7 @@ class AuthUMKM extends Controller
 
             } else if ($user->level === 'rt') {
 
-                return redirect('/dashboard');
+                return redirect('/dashboard/rt');
 
             } else if ($user->level === 'user') {
 

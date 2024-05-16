@@ -56,7 +56,7 @@ class AdminRTController extends Controller
         $dataUmkm = umkm::where('nama_usaha', 'like', "%{$r->search}%")
             ->orWhere('name', 'like', "%{$r->search}%")
             ->orWhere('nik', 'like', "%{$r->search}%")
-            ->with('getRT', 'getKategori')->paginate(2);
+            ->with('getRT', 'getKategori')->paginate(20);
         
         if ($dataUmkm->isEmpty()) {
 
@@ -68,9 +68,6 @@ class AdminRTController extends Controller
 
         }
     }
-
-
-
 
 
     /**

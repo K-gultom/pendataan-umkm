@@ -189,9 +189,9 @@
 
                     <input type="text" name="status" value="Sedang Ditinjau" hidden>
 
-                    <button type="submit" class="btn btn-primary btn-block">save</button>
+                    <button type="submit" class="btn btn-primary btn-block">save <i class="bi bi-check-lg"></i></button>
 
-                    <button type="reset" class="btn btn-warning btn-block">Reset</button>
+                    <button type="reset" class="btn btn-warning btn-block">Reset <i class="bi bi-x"></i></button>
                 </div>
             </form>
         </div>

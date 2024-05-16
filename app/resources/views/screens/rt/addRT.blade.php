@@ -16,7 +16,7 @@
     <h4 class="mb-2">Tambah Data RT</h4>
     <nav aria-label="breadcrumb" class="mb-1">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{url('/RT')}}">Data RT</a></li>
+        <li class="breadcrumb-item"><a href="{{url('/rt')}}">Data RT</a></li>
         <li class="breadcrumb-item active" aria-current="page">Tambah Data RT</li>
       </ol>
     </nav>

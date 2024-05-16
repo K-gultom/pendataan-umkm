@@ -82,7 +82,7 @@
 
             
             @if (Auth::user()->level == 'admin')
-                <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard ADMIN</a>
+                <a href="{{ url('/dashboard') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
 
                 <div class="nav-item dropdown">
                     <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,28 +96,28 @@
 
                 <div class="nav-item dropdown">
                     <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-people-fill"></i> UMKM
+                        <i class="bi bi-card-list"></i> UMKM
                     </a>
                     <div class="dropdown-menu mx-3">
                         <a href="{{ url('/umkm/jenis') }}" class="dropdown-item dropHover">Jenis UMKM</a>
                         <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
                     </div>
                 </div>
+                <a href="{{ url('/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-database"></i> Data UMKM</a>
+
             @endif
 
             @if (Auth::user()->level == 'rt')
                 <a href="{{ url('/dashboard/rt') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
-                <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Data UMKM</a>
+                <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-shop-window"></i> Data UMKM</a>
             @endif
                 
-
             @if (Auth::user()->level == 'user')
                 <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
-                <a href="{{ url('/umkm/data') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> UMKM Saya</a>
+                <a href="{{ url('/umkm/data') }}" class="side nav-item nav-link active text-light"><i class="bi bi-shop"></i> UMKM Saya</a>
             @endif
           
         </nav>
-          
     </div>
 
     <div class="col">

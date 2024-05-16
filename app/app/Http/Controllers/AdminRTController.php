@@ -50,6 +50,25 @@ class AdminRTController extends Controller
         return redirect('/admin')->with('message', 'Tambah data admin berhasil');
     }
 
+    
+    public function allUMKM(Request $r){
+
+        $dataUmkm = umkm::where('nama_usaha', 'like', "%{$r->search}%")
+            ->orWhere('name', 'like', "%{$r->search}%")
+            ->orWhere('nik', 'like', "%{$r->search}%")
+            ->with('getRT', 'getKategori')->paginate(2);
+        
+        if ($dataUmkm->isEmpty()) {
+
+          $noDataMessage = 'Maaf, Data UMKM Tidak Tersedia!!!';
+          return view('screens.admin.umkmData', compact( 'dataUmkm', ));
+
+        } else {
+          return view('screens.admin.umkmData', compact('dataUmkm'));
+
+        }
+    }
+
 
 
 
@@ -193,26 +212,5 @@ class AdminRTController extends Controller
             ]);
         }
     }
-
-    
-    // public function dataUmkm_save(Request $req){
-
-    //     $req->validate([
-    //         "status" => 'required',
-    //         "id" => 'required|integer',
-    //     ]);
-
-    //     $getId = $req->id;
-
-    //     // dd($req);
-    //     $new = umkm::findOrFail($getId);
-    //     $new -> status = $req -> status;
-    //     $new->save();
-
-    //     return redirect('rt/umkm')->with('message', 'Status Berhasil Diubah!!!');
-
-    // }
-
-
 
 }

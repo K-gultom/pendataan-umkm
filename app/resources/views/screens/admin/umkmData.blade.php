@@ -29,7 +29,7 @@
                 <form action="">
                     <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari Nama Pemilik/UMKM ...">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Nama Pemilik/UMKM/NIK ...">
                         <button class="btn btn-primary" type="submit">
                             <i class="bi bi-search"></i> Search
                         </button>
@@ -45,7 +45,7 @@
                         <strong>Data</strong> UMKM
                     </div>
                     <div class="w-100 text-end">
-                        <a href="{{url('/rt/umkm')}}" class="btn btn-primary">
+                        <a href="{{url('/umkm')}}" class="btn btn-primary">
                             Refresh Data <i class="bi bi-arrow-clockwise"></i>
                         </a>
                     </div>
@@ -83,11 +83,8 @@
                                 <td class="text-center">{{ $item->getKategori->nama_kategori }}</td>
                                 <td class="text-center">{{ $item->getRT->wilayah_rt }}</td>
                                 <td class="text-center">
-                                    <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
+                                    <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
                                         <i class="bi bi-eye"></i> Lihat Data
-                                    </a>
-                                    <a id="SaveModel" data-id="{{ $item->id }}" href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#saveData">
-                                        <i class="bi bi-eye"></i> Ubah Status UMKM
                                     </a>
                                 </td>
                             </tr>
@@ -98,43 +95,7 @@
             </div>
         </div>
     </div>
-
-    <div class="section">
-        <div class="modal fade" id="saveData" tabindex="-1" aria-labelledby="saveDataLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="saveDataLabel">Ubah Status UMKM</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ url('/api/update/umkm') }}" method="post" id="saveDataForm">
-                            @csrf
-                            <input type="text" name="id" id="saveDataId" hidden>
-                            <div class="row">
-                                <div class="col-4">
-                                    <p><strong>Status UMKM:</strong></p>
-                                </div>
-                                <div class="col-3">
-                                    <input type="radio" name="status" id="disetujui" value="Disetujui">
-                                    <label for="disetujui">Disetujui</label>
-                                </div>
-                                <div class="col-4">
-                                    <input type="radio" name="status" id="tidakdisetujui" value="Tidak Disetujui">
-                                    <label for="tidakdisetujui">Tidak Disetujui</label>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Simpan <i class="bi bi-check-lg"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <div class="section">
         <div class="modal fade" id="statusUmkm" tabindex="-1" aria-labelledby="statusUmkmLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -196,38 +157,6 @@
                 }
             }).catch(error => {
                 console.error('Error fetching data:', error);
-            });
-        });
-
-        // FOR SAVE DATA
-        document.querySelector('#saveDataForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            let formData = new FormData(this);
-
-            fetch('{{ url("/api/update/umkm") }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            }).then(response => response.json()).then(data => {
-                if (data.status) {
-                    alert(data.message);
-                    location.reload();
-                } else {
-                    alert('Error: ' + data.message);
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-            });
-        });
-
-        document.querySelectorAll('[data-bs-target="#saveData"]').forEach(button => {
-            button.addEventListener('click', function() {
-                let id = this.getAttribute('data-id');
-                document.getElementById('saveDataId').value = id;
             });
         });
     </script>

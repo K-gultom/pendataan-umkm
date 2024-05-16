@@ -13,7 +13,22 @@ class UserUMKMController extends Controller
 {
     public function index(){
 
-        return view('screens.user.home');
+        $userId = Auth::user()->id;
+        
+        $disetujui = Umkm::where('status', 'Disetujui')->where('user_id', $userId)->count();
+      
+        $tidakDisetujui = Umkm::where('status', 'Tidak Disetujui')->where('user_id', $userId)->count();
+
+        $sedangDitinjau = Umkm::where('status', 'Sedang Ditinjau')->where('user_id', $userId)->count();
+
+        return view('screens.user.home',  
+        compact(
+            'disetujui', 
+            'tidakDisetujui', 
+            'sedangDitinjau'
+            )
+        );
+
     }
     
     public function myUmkm() {

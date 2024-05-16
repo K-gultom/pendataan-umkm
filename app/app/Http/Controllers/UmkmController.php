@@ -94,5 +94,4 @@ class UmkmController extends Controller
 
     }
 
-
 }

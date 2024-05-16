@@ -14,7 +14,7 @@
         </nav>
         <div class="row mt-2 mb-3">
 
-            <div class="col-6">
+            <div class="col-12">
                 @if(session('message'))
                     <div id="flash-message" class="alert alert-success">
                         {{ session('message') }}
@@ -33,12 +33,46 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 mb-4">
+            <div class="col-lg-5 col-md-5 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Status dari RT</h3>
                         <p class="card-text">Disetujui/Tidak Disetujui</p>
-                        <a href="#" class="btn btn-more-info">More info <i class="fas fa-arrow-circle-right ms-2"></i></a>
+                        <a href="{{ url('/umkm/data') }}" class="btn btn-more-info">More info <i class="fas fa-arrow-circle-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="bg-success rounded-3 p-2 text-light">Disetujui</h5>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shop w-75 custom-icon-size"></i>
+                            <h4 class="card-text text-end">{{ $disetujui }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="bg-danger rounded-3 p-2 text-light">Tidak Disetujui</h5>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shop w-100 custom-icon-size"></i>
+                            <p class="card-text">{{ $tidakDisetujui }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="bg-warning rounded-3 p-2 text-light">Sedang ditinjau</h5>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shop w-100 custom-icon-size"></i>
+                            <p class="card-text">{{ $sedangDitinjau }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,6 +117,9 @@
         }
         .btn-more-info:hover {
             background-color: #0056b3;
+        }
+        .custom-icon-size {
+            font-size: 30px; /* Adjust the size as needed */
         }
     </style>
 @endsection

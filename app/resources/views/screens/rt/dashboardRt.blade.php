@@ -17,9 +17,11 @@
             {{-- @for ($a = 0; $a < 4; $a++) --}}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ $approvedCount }}</h3>
-                            <p class="card-text">UMKM Disetujui</p>
+                        <div class="card-body text-start">
+                            <div class="d-flex">
+                                <p class="card-text text-start w-100">UMKM Disetujui</p>
+                                <h3 class="card-title">{{ $approvedCount }}</h3>
+                            </div>
                             <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#umkmDisetujui">
                                 More info <i class="fas fa-arrow-circle-right ms-2"></i>
                             </a>
@@ -28,9 +30,11 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ $disapprovedCount }}</h3>
-                            <p class="card-text">UMKM Tidak Disetujui</p>
+                        <div class="card-body text-start">
+                            <div class="d-flex">
+                                <p class="card-text text-start w-100">UMKM Tidak Disetujui</p>
+                                <h3 class="card-title">{{ $disapprovedCount }}</h3>
+                            </div>
                             <a href="#" class="btn btn-more-info"  data-bs-toggle="modal" data-bs-target="#umkmTidakdisetujui">
                                 More info <i class="fas fa-arrow-circle-right ms-2"></i>
                             </a>
@@ -39,9 +43,11 @@
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ $approvedCount }}</h3>
-                            <p class="card-text">Jumlah UMKM Terdaftar</p>
+                        <div class="card-body text-start">
+                            <div class="d-flex">
+                                <p class="card-text text-start w-100">Jumlah UMKM Terdaftar</p>
+                                <h3 class="card-title">{{ $approvedCount }}</h3>
+                            </div>
                             <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#JumlahSeluruhUMKM">
                                 More info <i class="fas fa-arrow-circle-right ms-2"></i>
                             </a>

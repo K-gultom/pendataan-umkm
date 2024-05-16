@@ -90,7 +90,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="{{url('/rt')}}" class="btn btn-primary">Refresh Page</a>
+                <a href="{{url('/rt')}}" class="btn btn-primary">Refresh Page <i class="bi bi-arrow-clockwise"></i></a>
                 {{$data->links()}}
             </div>
         </div> 

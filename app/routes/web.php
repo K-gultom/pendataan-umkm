@@ -41,6 +41,7 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
     // SECTION DATA RT
         //  ADD DATA RT
         Route::get('/rt', [AdminRTController::class, 'rt']);
+        
 
         //Add Data
         Route::get('/rt/add', [AdminRTController::class, 'adminRT']);
@@ -64,10 +65,15 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
 
         Route::get('/umkm/kategori/del/{id}', [UmkmController::class, 'kategori_UMKM_del']);
 
+
+        // get all umkm
+
+        Route::get('/umkm', [AdminRTController::class, 'allUMKM']);
+
 });
 
     
-Route::middleware(['auth:','ceklevel:rt'])->group(function () {
+Route::middleware(['auth:','ceklevel:admin,rt,'])->group(function () {
    
     //SECTION RT ROUTING
         Route::get('/dashboard/rt', [AdminRTController::class, 'dashboardRt']);
@@ -76,10 +82,12 @@ Route::middleware(['auth:','ceklevel:rt'])->group(function () {
         Route::get('/rt/umkm', [AdminRTController::class, 'dataUmkm']);
         // Route::post('/rt/umkm', [AdminRTController::class, 'dataUmkm_save']);
 
+        
+
 });
 
 
-Route::middleware(['auth:','ceklevel:user'])->group(function () {
+Route::middleware(['auth:','ceklevel:user,admin'])->group(function () {
    
     //SECTION USER ROUTING
         Route::get('/dashboard/umkm', [UserUMKMController::class, 'index']);

@@ -23,13 +23,13 @@
                             </div>
 
                             @if (@isset($getProfile->alamat))
-                                
+                                <div class="w-100 text-end">
+                                    <a href="{{url('/umkm/lengkapi')}}" class="btn btn-primary"> 
+                                        Lengkapi Data <i class="bi bi-person"></i> 
+                                    </a> 
+                                </div>
                             @else
-                            <div class="w-100 text-end">
-                                <a href="{{url('/umkm/lengkapi')}}" class="btn btn-primary"> 
-                                    Lengkapi Data <i class="bi bi-person"></i> 
-                                </a> 
-                            </div>
+                                
                             @endif
                             
                         </div>
@@ -107,11 +107,11 @@
                         <div class="col">
                             <div class="row">
                                 @if (isset($getProfile->foto_ktp))
-                                    <div class="col">
+                                    <div class="col-6 text-center">
                                         <div class="mb-4">
-                                            <label class="form-label bg-primary p-1 rounded-4 w-25 text-center text-light" for="foto_ktp">Foto KTP</label> <br>
+                                            <label class="form-label bg-primary p-1 rounded-4 w-50 text-center text-light" for="foto_ktp">Foto KTP</label> <br>
                                             <a href="{{ url('/assets/images/ktp/'.$getProfile->foto_ktp) }}" target="_blank">
-                                                <img src="{{ url('/assets/images/ktp/'.$getProfile->foto_ktp) }}" class="img-fluid" alt="Foto_KTP" style="width: 50%;">
+                                                <img src="{{ url('/assets/images/ktp/'.$getProfile->foto_ktp) }}" class="img-fluid" alt="Foto_KTP" style="width: 100%;">
                                             </a>
                                         </div>
                                     </div>
@@ -119,16 +119,12 @@
                                     <label class="form-label" for="foto_ktp">Foto KTP</label> <br>
                                     <p class="bg-warning rounded-3 text-center p-1 col-6">Mohon Lengkapi Data Anda</p>
                                 @endif
-                                
-                            </div>
-    
-                            <div class="row">
                                 @if (isset($getProfile->foto_kk))
-                                    <div class="col">
+                                    <div class="col text-center">
                                         <div class="mb-2">
-                                            <label class="form-label bg-primary p-1 rounded-4 w-25 text-center text-light" for="foto_kk">Foto KK</label> <br>
+                                            <label class="form-label bg-primary p-1 rounded-4 w-50 text-center text-light" for="foto_kk">Foto KK</label> <br>
                                             <a href="{{ url('/assets/images/kk/'.$getProfile->foto_kk) }}" target="_blank">
-                                                <img src="{{ url('/assets/images/kk/'.$getProfile->foto_kk) }}" class="img-fluid" alt="Foto_KK" style="width: 70%;">
+                                                <img src="{{ url('/assets/images/kk/'.$getProfile->foto_kk) }}" class="img-fluid" alt="Foto_KK" style="width: 100%;">
                                             </a>
                                         </div>
                                     </div>
@@ -136,8 +132,8 @@
                                     <label class="form-label" for="foto_ktp">Foto KK</label> <br>
                                     <p class="bg-warning rounded-3 text-center p-1 col-6">Mohon Lengkapi Data Anda</p>
                                 @endif
-                                
                             </div>
+
                         </div>
                         </div>
                     </div>

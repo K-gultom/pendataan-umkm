@@ -22,14 +22,14 @@
                                 <strong>Profile</strong> saya
                             </div>
 
-                            @if (@isset($getProfile->alamat))
+                            @if (empty($getProfile->alamat))
                                 <div class="w-100 text-end">
                                     <a href="{{url('/umkm/lengkapi')}}" class="btn btn-primary"> 
                                         Lengkapi Data <i class="bi bi-person"></i> 
                                     </a> 
                                 </div>
                             @else
-                                
+
                             @endif
                             
                         </div>

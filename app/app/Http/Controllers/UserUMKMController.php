@@ -43,7 +43,7 @@ class UserUMKMController extends Controller
           return view('screens.user.myUmkm', compact('noDataMessage', 'getUmkm', 'getProfile'));
 
         } else {
-          return view('screens.user.myUmkm', compact('getUmkm'));
+          return view('screens.user.myUmkm', compact('getUmkm', 'getProfile'));
 
         }
 
@@ -120,6 +120,8 @@ class UserUMKMController extends Controller
 
 
     public function edit(){
+        
+        // $getProfile = Auth::user();
 
         $umkmData = umkm::where('user_id', auth()->id())->first();
 
@@ -129,7 +131,7 @@ class UserUMKMController extends Controller
 
         if ($umkmData) {
             // Jika data umkm sudah diisi, kirim data ke view untuk ditampilkan dalam form
-            return view('screens.user.editDataUmkm', compact('umkmData', 'getRt', 'getKategori', 'getJenis', ));
+            return view('screens.user.editDataUmkm', compact('umkmData', 'getRt', 'getKategori', 'getJenis' ));
         } else {
             // Jika belum diisi, kirim form kosong ke view
             return view('screens.user.myUmkm', compact('getRt', 'getKategori', 'getJenis', ));
@@ -150,9 +152,10 @@ class UserUMKMController extends Controller
             'nama_usaha' => 'required|min:3|max:50',
             'alamat_usaha' => 'required|min:5|max:100',
             'telp' => 'required|max:15',
+            'foto_umkm' => 'mimes:jpg,jpeg,png',
             // 'status' => 'nullable'
         ]);
-
+        
         // dd($req->all());
         $new                    = umkm::findOrFail($id);
         $new->user_id           = Auth::user()->id;
@@ -165,19 +168,36 @@ class UserUMKMController extends Controller
         $new->nama_usaha        = $req->nama_usaha;
         $new->alamat_usaha      = $req->alamat_usaha;
         $new->telp              = $req->telp;
-        // $new->status            = $req->status;
+
         
+        // Periksa apakah ada foto KTP sebelumnya
+        if ($req->hasFile('foto_umkm')) {
+            $foto_umkm = $req->file('foto_umkm');
+            $new_photo_name_umkm = uniqid().".".$foto_umkm->getClientOriginalExtension();
+            $foto_umkm->move('assets/images/umkm', $new_photo_name_umkm);
+    
+            // Periksa apakah ada foto UMKM sebelumnya
+            if ($new->foto_umkm) {
+                $old_photo_path = 'assets/images/umkm/' . $new->foto_umkm;
+    
+                // Hapus foto UMKM sebelumnya jika file tersebut ada
+                if (File::exists($old_photo_path)) {
+                    File::delete($old_photo_path);
+                }
+            }
+
+            // Save Data Foto
+            $new->foto_umkm = $new_photo_name_umkm;
+        }
+
+
+        // Save Data Status
         if ($umkmData->status == 'Disetujui') {
-
             $umkmData->status = 'Disetujui';
-
         } else if($umkmData->status == 'Tidak Disetujui'){
-
             $umkmData->status = 'Tidak Disetujui';
-            
         } else{
             $umkmData->status = 'Sedang Ditinjau';
-
         }
 
         $new->save();
@@ -187,12 +207,24 @@ class UserUMKMController extends Controller
     }
 
     public function hapus($id){
-
-        $data = umkm::find($id);
-        $data -> delete();
-
+        $data = Umkm::find($id);
+    
+        if ($data) {
+            // Path ke foto UMKM
+            $photo_path = public_path('assets/images/umkm/' . $data->foto_umkm);
+    
+            // Hapus file foto jika ada
+            if (File::exists($photo_path)) {
+                File::delete($photo_path);
+            }
+    
+            // Hapus data dari tabel
+            $data->delete();
+        }
+    
         return redirect()->back()->with('message', 'Data Berhasil Dihapus!!!');
     }
+    
 
     public function profile(){
 

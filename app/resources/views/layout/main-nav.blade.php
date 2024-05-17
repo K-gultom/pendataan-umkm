@@ -91,6 +91,7 @@
                     <div class="dropdown-menu mx-3">
                         <a href="{{ url('/admin') }}" class="dropdown-item dropHover">Data Admin</a>
                         <a href="{{ url('/rt') }}" class="dropdown-item dropHover">Data RT</a>
+                        <a href="{{ url('/umkm') }}" class="dropdown-item dropHover">Data User</a>
                     </div>
                 </div>
 
@@ -103,7 +104,7 @@
                         <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
                     </div>
                 </div>
-                <a href="{{ url('/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-database"></i> Data UMKM</a>
+                <a href="{{ url('/umkm/master') }}" class="side nav-item nav-link active text-light"><i class="bi bi-database"></i> Data UMKM</a>
 
             @endif
 

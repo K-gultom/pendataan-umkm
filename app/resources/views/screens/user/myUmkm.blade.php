@@ -20,13 +20,13 @@
                         <strong>Data</strong> UMKM
                     </div>
                     <div class="w-100 text-end">
-                        @if (empty($getProfile->foto_ktp))
-                            <a href="{{url('/umkm/profile')}}" class="btn btn-primary"> 
-                                Lengkapi Data Diri <i class="bi bi-plus-circle"></i> 
-                            </a> 
-                        @else
+                        @if ($getProfile->alamat > 0)
                             <a href="{{url('/umkm/add')}}" class="btn btn-primary"> 
                                 Tambah Data UMKM <i class="bi bi-plus-circle"></i> 
+                            </a> 
+                        @else
+                            <a href="{{url('/umkm/profile')}}" class="btn btn-primary"> 
+                                Lengkapi Data Diri <i class="bi bi-plus-circle"></i> 
                             </a> 
                         @endif
                     </div>

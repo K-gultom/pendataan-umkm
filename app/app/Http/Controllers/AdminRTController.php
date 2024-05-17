@@ -69,6 +69,19 @@ class AdminRTController extends Controller
         }
     }
 
+    public function user_umkm(Request $r){
+        
+        $getData = umkm::where('nama_usaha', 'like', "%{$r->search}%")
+            ->orWhere('name', 'like', "%{$r->search}%")
+            ->orWhere('nik', 'like', "%{$r->search}%")
+            ->with('getRT', 'getKategori', 'getUser')->paginate(20);
+        // dd($getData);
+
+        return view('screens.admin.userData.allUser', compact('getData'));
+    }
+
+
+    // ================================================================================================
 
     /**
      * this is section rt

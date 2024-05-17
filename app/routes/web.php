@@ -71,7 +71,10 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
 
         // get all umkm
 
-        Route::get('/umkm', [AdminRTController::class, 'allUMKM']);
+        Route::get('/umkm/master', [AdminRTController::class, 'allUMKM']);
+
+        // Untuk Reset Password
+        Route::get('/umkm', [AdminRTController::class, 'user_umkm']);
 
 });
 

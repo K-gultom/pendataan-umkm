@@ -21,6 +21,17 @@ class umkm extends Model
     }
 
     /**
+     * Get the getUser that owns the umkm
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function getUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+
+    /**
      * Get the getKategori that owns the umkm
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

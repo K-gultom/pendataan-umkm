@@ -1,7 +1,7 @@
 @extends('layout.main-nav')
 
 @section('title')
-    Edit Data UMKM
+    Data UMKM Saya
 @endsection
 
 @section('content')
@@ -13,10 +13,11 @@
 </style>
 
 <div class="container-fluid ">
-    <h4 class="mb-2">Update Data UMKM</h4>
+    <h4 class="mb-2">Data UMKM</h4>
     <nav aria-label="breadcrumb" class="mb-1">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
+        <li class="breadcrumb-item"><a href="{{url('/umkm/data')}}" class="text-decoration-none">Data UMKM Saya</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Lihat Data</li>
       </ol>
     </nav>
     <div class="card">
@@ -39,8 +40,8 @@
                 @csrf
                 
                 <div class="row">
-                    <div class="col">
-                        <div class="form-outline">
+                    <div class="col-6">
+                        <div class="form-outline mb-4">
                             <label class="form-label" for="name">Nama Lengkap</label>
                             {{-- <input value="{{old('name')}}" type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Pemilik Usaha"/> --}}
                             <input value="{{ $umkmData->name ?? old('name') }}" type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Pemilik Usaha" />
@@ -51,8 +52,10 @@
                             @endif
                         </div>
                     </div>
-                    {{-- <input value="{{old('user_id')}}" type="text" name="user_id" class="form-control"  value="{{ $getUser->id}}"/> --}}
-                    <div class="col">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="nik">Nomor Induk Kependudukan (NIK)</label>
                             <input type="number" value="{{ $umkmData->nik ?? old('nik') }}" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor induk kependudukan"/>
@@ -63,27 +66,11 @@
                             @endif
                         </div>
                     </div>
-                    {{-- <div class="col">
-                        <div class="form-outline">
-                            <label class="form-label" for="rt_id">RT</label>
-                            <div class="input-group">
-                                <select  value="{{old('rt_id')}}" name="rt_id" class="form-control @error('rt_id') is-invalid @enderror" id="">
-                                    <option value="">Pilih RT</option> 
-                                    @foreach ($getRt as $item)
-                                        <option value="{{$item->id}}">{{$item->wilayah_rt}}</option>
-                                    @endforeach
-                                </select>
-                                <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
-                            </div>
-                            @error('rt_id')
-                                <div class="invalid-feedback">
-                                {{$message}}
-                                </div>
-                            @endif
-                        </div>
-                    </div> --}}
-                    <div class="col">
-                        <div class="form-outline">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-outline mb-4">
                           <label class="form-label" for="rt_id">RT</label>
                           <div class="input-group">
                             <select value="{{ old('rt_id') ?? $umkmData->rt_id }}" name="rt_id" class="form-control @error('rt_id') is-invalid @enderror" id="">

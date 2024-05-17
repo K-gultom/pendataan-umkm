@@ -10,7 +10,8 @@
         <h4 class="mb-3">Jenis UMKM</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Jenis UMKM</li>
+                <li class="breadcrumb-item"><a href="{{url('/umkm/jenis')}}" class="text-decoration-none">Jenis UMKM</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit Jenis UMKM</li>
             </ol>
         </nav>
 
@@ -20,23 +21,23 @@
                     <div class="card-header">
                         <div class="d-flex">
                             <div class="w-100 pt-1"> 
-                                <strong>Tambah</strong> Data
+                                <strong>Edit</strong> Data
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('/umkm/jenis/add') }}" method="post">
+                        <form action="{{ url('/umkm/jenis/edit') }}/{{ $getid->id }}" method="post">
                             @csrf
                                 <div class="form-group mb-3">
                                     <label for="Jenis_UMKM">Jenis UMKM</label>
-                                    <input type="text" id="Jenis_UMKM" value="{{old('Jenis_UMKM')}}" class="form-control @error('Jenis_UMKM') is-invalid @enderror" name="Jenis_UMKM" placeholder="Jenis UMKM">
+                                    <input type="text" id="Jenis_UMKM" value="{{old('Jenis_UMKM', $getid->jenis_umkm)}}" class="form-control @error('Jenis_UMKM') is-invalid @enderror" name="Jenis_UMKM" placeholder="Jenis UMKM">
                                     @error('Jenis_UMKM')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
                                     @enderror
                                 </div>
-                            <button type="submit" class="btn btn-primary">Save <i class="bi bi-check-lg"></i></button>
+                            <button type="submit" class="btn btn-primary">Update <i class="bi bi-check-lg"></i></button>
                             <a href="{{ url('/umkm/jenis') }}" class="btn btn-danger">Cancel <i class="bi bi-x"></i></a>
                        </form>
                     </div>

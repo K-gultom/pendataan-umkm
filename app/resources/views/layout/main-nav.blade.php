@@ -114,6 +114,7 @@
                 
             @if (Auth::user()->level == 'user')
                 <a href="{{ url('/dashboard/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
+                <a href="{{ url('/umkm/profile') }}" class="side nav-item nav-link active text-light"><i class="bi bi-person"></i> Profile</a>
                 <a href="{{ url('/umkm/data') }}" class="side nav-item nav-link active text-light"><i class="bi bi-shop"></i> UMKM Saya</a>
             @endif
           

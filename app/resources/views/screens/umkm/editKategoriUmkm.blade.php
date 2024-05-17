@@ -37,8 +37,8 @@
                                         </div>
                                     @enderror
                                 </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="{{ url('/umkm/kategori') }}" class="btn btn-danger">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update <i class="bi bi-check-lg"></i></button>
+                            <a href="{{ url('/umkm/kategori') }}" class="btn btn-danger">Cancel <i class="bi bi-x"></i></a>
                        </form>
                     </div>
                 </div>

@@ -27,8 +27,14 @@
                 @endif
                 <div class="card mb-4">
                     <div class="card-body abc">
-                        Pastikan kelengkapan data UMKM Anda sudah sesuai!!! <br>
-                        -> Sesuaikan pada menu Kelengkapan
+                        <h4>Panduan!!!</h4>
+                        <ol>
+                            <li>Silahkan Lengkapi Data Diri Terlebih Dahulu Pada Menu Profile</li>
+                            <li>Tambah Data UMKM Anda Pada Menu UMKM Saya</li>
+                        </ol>
+                        <ul>
+                            <li>Pastikan kelengkapan data UMKM Anda sudah sesuai</li>
+                        </ul>
                     </div>
                 </div>
             </div>

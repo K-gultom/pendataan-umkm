@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('level', ['admin', 'rt', 'user'])->nullable();
             $table->string('wilayah_rt')->unique()->nullable();
+            $table->string('foto_ktp')->nullable();
+            $table->string('foto_kk')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

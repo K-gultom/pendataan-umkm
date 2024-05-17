@@ -54,6 +54,9 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
         Route::post('/umkm/jenis/add', [UmkmController::class, 'jenis_UMKM_store']);
         Route::get('/umkm/jenis/del/{id}', [UmkmController::class, 'jenis_UMKM_del']);
 
+        Route::get('/umkm/jenis/edit/{id}', [UmkmController::class, 'edit_jenis_UMKM']);
+        Route::post('/umkm/jenis/edit/{id}', [UmkmController::class, 'edit_jenis_UMKM_save']);
+
 
         //Kategori UMKM
         Route::get('/umkm/kategori', [UmkmController::class, 'kategori_UMKM_view']);
@@ -93,8 +96,8 @@ Route::middleware(['auth:','ceklevel:user,admin'])->group(function () {
         Route::get('/dashboard/umkm', [UserUMKMController::class, 'index']);
 
         Route::get('/umkm/data', [UserUMKMController::class, 'myUmkm']);
-        
 
+        Route::get('/umkm/view/{id}', [UserUMKMController::class, 'viewData']);
 
         Route::get('/umkm/add', [UserUMKMController::class, 'addData']);
         Route::post('/umkm/add', [UserUMKMController::class, 'addData_save']);
@@ -104,6 +107,21 @@ Route::middleware(['auth:','ceklevel:user,admin'])->group(function () {
         Route::post('/umkm/edit/{id}', [UserUMKMController::class, 'edit_save']);
 
         Route::get('/umkm/del/{id}', [UserUMKMController::class, 'hapus']);
+
+        Route::get('/umkm/profile', [UserUMKMController::class, 'profile']);
+
+
+        Route::get('/umkm/lengkapi', [UserUMKMController::class, 'kelengkapan']);
+        Route::post('/umkm/lengkapi', [UserUMKMController::class, 'kelengkapan_save']);
+
+        Route::get('/umkm/update', [UserUMKMController::class, 'dataDiri']);
+        Route::post('/umkm/update', [UserUMKMController::class, 'dataDiri_save']);
+
+        Route::get('/umkm/update/ktp', [UserUMKMController::class, 'dataKtp']);
+        Route::post('/umkm/update/ktp', [UserUMKMController::class, 'dataKtp_save']);
+
+        Route::get('/umkm/update/kk', [UserUMKMController::class, 'dataKk']);
+        Route::post('/umkm/update/kk', [UserUMKMController::class, 'dataKk_save']);
 
 
 });

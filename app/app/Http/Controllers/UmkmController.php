@@ -28,6 +28,24 @@ class UmkmController extends Controller
         return redirect()->back()->with('message', 'Tambah jenis UMKM Berhasil!!!');
     }
 
+    public function edit_jenis_UMKM($id){
+
+        $data = jenis_umkm::all();
+        $getid = jenis_umkm::find($id);
+        return view('screens.umkm.editjenisUmkm', compact('data', 'getid'));
+    }
+    public function edit_jenis_UMKM_save(Request $req, $id){
+        $req->validate([
+            "Jenis_UMKM" => 'required|unique:jenis_umkms,jenis_umkm',
+        ]);
+
+        $new = jenis_umkm::find($id);
+        $new -> jenis_umkm = $req -> Jenis_UMKM;
+        $new ->save();
+
+        return redirect('/umkm/jenis')->with('message', 'Edit jenis UMKM Berhasil!!!');
+    }
+
     public function jenis_UMKM_del($id){
         $data = jenis_umkm::findOrFail($id);
         $data->delete();

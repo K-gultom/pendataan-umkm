@@ -16,6 +16,7 @@
     <h4 class="mb-2">Tambah Data UMKM</h4>
     <nav aria-label="breadcrumb" class="mb-1">
       <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{url('/umkm/data')}}" class="text-decoration-none">Data UMKM Saya</a></li>
         <li class="breadcrumb-item active" aria-current="page">Tambah Data</li>
       </ol>
     </nav>
@@ -35,14 +36,14 @@
               </div>
             @endif
             
-            <form action="{{ url('/umkm/add') }}" method="POST">
+            <form action="{{ url('/umkm/add') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="row">
                     <div class="col">
                         <div class="form-outline">
                             <label class="form-label" for="name">Nama Lengkap</label>
-                            <input value="{{old('name')}}" type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Pemilik Usaha"/>
+                            <input value="{{old('name', $getProfile->name)}}" type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Pemilik Usaha"/>
                             @error('name')
                             <div class="invalid-feedback">
                                 {{$message}}
@@ -50,18 +51,26 @@
                             @endif
                         </div>
                     </div>
-                    {{-- <input value="{{old('user_id')}}" type="text" name="user_id" class="form-control"  value="{{ $getUser->id}}"/> --}}
                     <div class="col">
                         <div class="form-outline mb-4">
                             <label class="form-label" for="nik">Nomor Induk Kependudukan (NIK)</label>
-                            <input type="number" value="{{old('nik')}}" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor induk kependudukan"/>
+                            <input type="number" value="{{ old('nik') }}" name="nik" id="nik" class="form-control @error('nik') is-invalid @enderror" placeholder="Nomor induk kependudukan" maxlength="16" oninput="validateLength(this)"/>
                             @error('nik')
                                 <div class="invalid-feedback">
-                                {{$message}}
+                                    {{ $message }}
                                 </div>
-                            @endif
+                            @enderror
                         </div>
                     </div>
+                    <script>
+                        // Hanya bisa menerima inputan maximal 16 karakter
+                        function validateLength(input) {
+                            if (input.value.length > 16) {
+                                input.value = input.value.slice(0, 16);
+                            }
+                        }
+                    </script>
+                    
                     <div class="col">
                         <div class="form-outline">
                             <label class="form-label" for="rt_id">RT</label>
@@ -69,7 +78,9 @@
                                 <select  value="{{old('rt_id')}}" name="rt_id" class="form-control @error('rt_id') is-invalid @enderror" id="">
                                     <option value="">Pilih RT</option> 
                                     @foreach ($getRt as $item)
-                                        <option value="{{$item->id}}">{{$item->wilayah_rt}}</option>
+                                        <option value="{{$item->id}}" {{ old('rt_id') == $item->id ? 'selected' : '' }}>
+                                            {{$item->wilayah_rt}}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
@@ -115,7 +126,9 @@
                                     <select  value="{{old('jenis_umkm_id')}}" name="jenis_umkm_id" class="form-control @error('jenis_umkm_id') is-invalid @enderror" id="">
                                         <option value="">Pilih Jenis UMKM</option>  
                                         @foreach ($getJenis as $item)
-                                            <option value="{{$item->id}}">{{$item->jenis_umkm}}</option>
+                                            <option value="{{$item->id}}" {{ old('jenis_umkm_id') == $item->id ? 'selected' : '' }}>
+                                                {{$item->jenis_umkm}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
@@ -134,7 +147,9 @@
                                     <select  value="{{old('kategori_umkm_id')}}" name="kategori_umkm_id" class="form-control @error('kategori_umkm_id') is-invalid @enderror" id="">
                                         <option value="">Pilih Kategori UMKM</option> 
                                         @foreach ($getKategori as $item)
-                                            <option value="{{$item->id}}">{{$item->nama_kategori}}</option>
+                                            <option value="{{$item->id}}" {{ old('kategori_umkm_id') == $item->id ? 'selected' : '' }}>
+                                                {{$item->nama_kategori}}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <span class="input-group-text"><i class="bi bi-caret-down-fill"></i></span>
@@ -183,6 +198,21 @@
                                     {{$message}}
                                     </div>
                                 @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-outline mb-4">
+                                <label for="foto_umkm">Foto Bangunan UMKM</label>
+                                <input value="{{old('foto_umkm')}}" type="file" name="foto_umkm" id="foto_umkm" class="form-control @error('foto_umkm') is-invalid @enderror">
+                                <p class="mt-1"><sup><i>Dokumen yang diupload harus dalam bentuk JPEG, JPG, PNG</i></sup></p>
+                                @error('foto_umkm')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>

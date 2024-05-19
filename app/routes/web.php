@@ -85,8 +85,14 @@ Route::middleware(['auth:','ceklevel:admin,rt,'])->group(function () {
         Route::get('/dashboard/rt', [AdminRTController::class, 'dashboardRt']);
         
    // DATA UMKM ALL
-        Route::get('/rt/umkm', [AdminRTController::class, 'dataUmkm']);
-        // Route::post('/rt/umkm', [AdminRTController::class, 'dataUmkm_save']);
+        Route::get('/rt/ditinjau', [AdminRTController::class, 'ditinjau']);
+
+        Route::get('/rt/disetujui', [AdminRTController::class, 'disetujui']);
+
+        Route::get('/rt/tidak/disetujui', [AdminRTController::class, 'tidak_disetujui']);
+
+        Route::get('/rt/status/{id}', [AdminRTController::class, 'ubahStatus']);
+        Route::post('/rt/status/{id}', [AdminRTController::class, 'ubahStatus_Save']);
 
         
 

@@ -52,10 +52,10 @@
             <div class="col-lg-2 col-md-2 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="bg-success rounded-3 p-2 text-light">Disetujui</h5>
+                        <h6 class="bg-success rounded-3 p-2 text-light">Disetujui</h6>
                         <div class="d-flex align-items-center">
                             <i class="bi bi-shop w-75 custom-icon-size"></i>
-                            <h4 class="card-text text-end">{{ $disetujui }}</h4>
+                            <h4 class="mx-2">{{ $disetujui }}</h4>
                         </div>
                     </div>
                 </div>
@@ -63,10 +63,10 @@
             <div class="col-lg-2 col-md-2 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="bg-danger rounded-3 p-2 text-light">Tidak Disetujui</h5>
+                        <h6 class="bg-danger rounded-3 p-2 text-light">Tidak Disetujui</h6>
                         <div class="d-flex align-items-center">
                             <i class="bi bi-shop w-100 custom-icon-size"></i>
-                            <p class="card-text">{{ $tidakDisetujui }}</p>
+                            <h4 class="mx-2">{{ $tidakDisetujui }}</h4>
                         </div>
                     </div>
                 </div>
@@ -74,10 +74,10 @@
             <div class="col-lg-2 col-md-2 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="bg-warning rounded-3 p-2 text-light">Sedang ditinjau</h5>
+                        <h6 class="bg-warning rounded-3 p-2 text-light">Sedang ditinjau</h6>
                         <div class="d-flex align-items-center">
                             <i class="bi bi-shop w-100 custom-icon-size"></i>
-                            <p class="card-text">{{ $sedangDitinjau }}</p>
+                            <h4 class="mx-2">{{ $sedangDitinjau }}</h4>
                         </div>
                     </div>
                 </div>

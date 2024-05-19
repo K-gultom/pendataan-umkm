@@ -15,42 +15,59 @@
         
         <div class="row">
             {{-- @for ($a = 0; $a < 4; $a++) --}}
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-3 mb-4">
                     <div class="card">
-                        <div class="card-body text-start">
-                            <div class="d-flex">
-                                <p class="card-text text-start w-100">UMKM Disetujui</p>
-                                <h3 class="card-title">{{ $approvedCount }}</h3>
+                        <div class="card-body">
+                            <h6 class="bg-warning rounded-3 p-2 text-light">Sedang ditinjau</h6>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <i class="bi bi-shop custom-icon-size"></i>
+                                <h3 class="mx-2">{{ $sedangDitinjau }}</h3>
                             </div>
-                            <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#umkmDisetujui">
-                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
-                            </a>
+                            <div class="text-end mt-2">
+                                <a href="{{ url('/rt/ditinjau') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-3 mb-4">
                     <div class="card">
-                        <div class="card-body text-start">
-                            <div class="d-flex">
-                                <p class="card-text text-start w-100">UMKM Tidak Disetujui</p>
-                                <h3 class="card-title">{{ $disapprovedCount }}</h3>
+                        <div class="card-body">
+                            <h6 class="bg-success rounded-3 p-2 text-light">Disetujui</h6>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <i class="bi bi-shop custom-icon-size"></i>
+                                <h4 class="mx-2">{{ $disetujui }}</h4>
                             </div>
-                            <a href="#" class="btn btn-more-info"  data-bs-toggle="modal" data-bs-target="#umkmTidakdisetujui">
-                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
-                            </a>
+                            <div class="text-end mt-2">
+                                <a href="{{ url('/rt/disetujui') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-3 mb-4">
                     <div class="card">
-                        <div class="card-body text-start">
-                            <div class="d-flex">
-                                <p class="card-text text-start w-100">Jumlah UMKM Terdaftar</p>
-                                <h3 class="card-title">{{ $approvedCount }}</h3>
+                        <div class="card-body">
+                            <h6 class="bg-danger rounded-3 p-2 text-light">Tidak Disetujui</h6>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <i class="bi bi-shop custom-icon-size"></i>
+                                <h4 class="mx-2">{{ $tidakDisetujui }}</h4>
                             </div>
-                            <a href="#" class="btn btn-more-info" data-bs-toggle="modal" data-bs-target="#JumlahSeluruhUMKM">
-                                More info <i class="fas fa-arrow-circle-right ms-2"></i>
-                            </a>
+                            <div class="text-end mt-2">
+                                <a href="{{ url('/rt/tidak/disetujui') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="bg-info rounded-3 p-2 text-light">UMKM Terdaftar</h6>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <i class="bi bi-shop custom-icon-size"></i>
+                                <h4 class="mx-2">{{ $disetujui }}</h4>
+                            </div>
+                            <div class="text-end mt-2">
+                                <a href="{{ url('/rt/disetujui') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,75 +100,20 @@
             font-size: 1.5rem;
             color: #6c757d;
         }
-        .btn-more-info {
-            background-color: #007bff;
+        .btn_info{
+            background-color: #003788;
             color: #fff;
             border-radius: 5px;
             padding: 8px 16px;
             transition: background-color 0.3s ease;
         }
-        .btn-more-info:hover {
-            background-color: #0056b3;
+        .btn_info:hover {
+            background-color: #DC6B19;
+            color: #000000;
+        }
+        .custom-icon-size {
+            font-size: 30px; /* Adjust the size as needed */
         }
     </style>
 
-    {{-- UMKM YANG DISETUJUI --}}
-    <div class="section1">
-        <div class="modal fade" id="umkmDisetujui" tabindex="-1" aria-labelledby="umkmDisetujuiLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="umkmDisetujuiLabel">Jumlah UMKM Disetujui</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Jumlah UMKM Yang Disetujui di wilah RT Anda Adalah <strong>{{ $approvedCount }}</strong>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- UMKM YANG TIDAK DISETJUI --}}
-    <div class="section2">
-        <div class="modal fade" id="umkmTidakdisetujui" tabindex="-1" aria-labelledby="umkmTidakdisetujuiLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="umkmTidakdisetujuiLabel">Jumlah UMKM Tidak Disetujui</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Jumlah UMKM Yang Disetujui di wilah RT Anda Adalah <strong>{{ $disapprovedCount }}</strong>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- JUMLAH KESELURUHAN UMKM --}}
-    <div class="section3">
-        <div class="modal fade" id="JumlahSeluruhUMKM" tabindex="-1" aria-labelledby="JumlahSeluruhUMKMLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="JumlahSeluruhUMKMLabel">Jumlah Seluruh UMKM</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Jumlah Seluruh Yang Terdaftar UMKM <strong>{{ $approvedCount }}</strong>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection

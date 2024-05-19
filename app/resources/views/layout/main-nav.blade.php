@@ -110,7 +110,17 @@
 
             @if (Auth::user()->level == 'rt')
                 <a href="{{ url('/dashboard/rt') }}" class="side nav-item nav-link active text-light"><i class="bi bi-house-fill"></i> Dashboard</a>
-                <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-shop-window"></i> Data UMKM</a>
+                {{-- <a href="{{ url('/rt/umkm') }}" class="side nav-item nav-link active text-light"><i class="bi bi-shop-window"></i> Data UMKM</a> --}}
+                <div class="nav-item dropdown">
+                    <a class="side nav-link active text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-card-list"></i> Data UMKM
+                    </a>
+                    <div class="dropdown-menu mx-3">
+                        <a href="{{ url('/rt/ditinjau') }}" class="dropdown-item dropHover">Sedang Ditinjau</a>
+                        <a href="{{ url('/rt/disetujui') }}" class="dropdown-item dropHover">Disetujui</a>
+                        <a href="{{ url('/rt/tidak/disetujui') }}" class="dropdown-item dropHover">Tidak Disetujui</a>
+                    </div>
+                </div>
             @endif
                 
             @if (Auth::user()->level == 'user')

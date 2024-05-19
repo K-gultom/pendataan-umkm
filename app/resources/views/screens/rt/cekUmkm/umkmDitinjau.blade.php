@@ -1,15 +1,15 @@
 @extends('layout.main-nav')
 
 @section('title')
-    Data UMKM
+    Data UMKM 
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="mb-3">Data UMKM</h4>
+        <h4 class="mb-3">Data UMKM Test</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Data UMKM</li>
+                <li class="breadcrumb-item active" aria-current="page">Data UMKM Sedang Ditinjau</li>
             </ol>
         </nav>
 
@@ -29,7 +29,7 @@
                 <form action="">
                     <label for="search" class="form-label"><strong>Cari Data</strong> UMKM</label><br>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari Nama Pemilik/UMKM ...">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Nama Pemilik ...">
                         <button class="btn btn-primary" type="submit">
                             <i class="bi bi-search"></i> Search
                         </button>
@@ -42,10 +42,10 @@
             <div class="card-header">
                 <div class="d-flex">
                     <div class="w-100 pt-1">
-                        <strong>Data</strong> UMKM
+                        <strong>Data</strong> UMKM Sedang Ditinjau
                     </div>
                     <div class="w-100 text-end">
-                        <a href="{{url('/rt/umkm')}}" class="btn btn-primary">
+                        <a href="{{url('/rt/ditinjau')}}" class="btn btn-primary">
                             Refresh Data <i class="bi bi-arrow-clockwise"></i>
                         </a>
                     </div>
@@ -53,52 +53,57 @@
             </div>
 
             <div class="card-body">
-                @if(isset($noDataMessage))
-                    <div class="alert alert-warning">
-                        {{ $noDataMessage }}
+                @if($getData->isEmpty())
+                    <div class="alert alert-danger">
+                        Maaf, tidak ada UMKM yang <strong>Sedang Ditinjau!!!</strong>
                     </div>
-                @endif
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Pemilik</th>
-                            <th>Nama UMKM</th>
-                            <th class="text-center">Jenis UMKM</th>
-                            <th class="text-center">Kategori UMKM</th>
-                            <th class="text-center">RT</th>
-                            <th class="text-center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dataUmkm as $item)
+                @else
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
-                                <td>
-                                    {{ (($dataUmkm->currentPage() - 1) * $dataUmkm->perPage()) + $loop->iteration }}
-                                </td>
-                                <td>{{ $item->name }}</td>
-                                <td>{{ $item->nama_usaha }}</td>
-                                <td class="text-center">{{ $item->getJenis->jenis_umkm }}</td>
-                                <td class="text-center">{{ $item->getKategori->nama_kategori }}</td>
-                                <td class="text-center">{{ $item->getRT->wilayah_rt }}</td>
-                                <td class="text-center">
-                                    <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
-                                        <i class="bi bi-eye"></i> Lihat Data
-                                    </a>
-                                    <a id="SaveModel" data-id="{{ $item->id }}" href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#saveData">
-                                        <i class="bi bi-eye"></i> Ubah Status UMKM
-                                    </a>
-                                </td>
+                                <th>No</th>
+                                <th>Nama Pemilik</th>
+                                <th>Nama UMKM</th>
+                                <th class="text-center">Jenis UMKM</th>
+                                <th class="text-center">Kategori UMKM</th>
+                                <th class="text-center">RT</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                {{ $dataUmkm->links() }}
+                        </thead>
+                        <tbody>
+                            @foreach ($getData as $item)
+                                <tr>
+                                    <td>
+                                        {{ (($getData->currentPage() - 1) * $getData->perPage()) + $loop->iteration }}
+                                    </td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->nama_usaha }}</td>
+                                    <td class="text-center">{{ $item->getJenis->jenis_umkm }}</td>
+                                    <td class="text-center">{{ $item->getKategori->nama_kategori }}</td>
+                                    <td class="text-center">{{ $item->getRT->wilayah_rt }}</td>
+                                    <td class="text-center">
+                                        <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
+                                            <i class="bi bi-eye"></i> Status
+                                        </a>
+                                        {{-- <a id="SaveModel" data-id="{{ $item->id }}" href="" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#saveData">
+                                            <i class="bi bi-eye"></i> Ubah Status UMKM
+                                        </a> --}}
+                                        <a href="{{ url('/rt/status') }}/{{ $item->id }}" class="btn btn-warning btn-sm">
+                                            <i class="bi bi-pencil"></i> Lihat Data/Ubah Status
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    {{ $getData->links() }}
+                @endif
+                
             </div>
         </div>
     </div>
 
+    {{-- Ubah Status --}}
     <div class="section">
         <div class="modal fade" id="saveData" tabindex="-1" aria-labelledby="saveDataLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -135,6 +140,7 @@
         </div>
     </div>
 
+    {{-- Lihat Data --}}
     <div class="section">
         <div class="modal fade" id="statusUmkm" tabindex="-1" aria-labelledby="statusUmkmLabel" aria-hidden="true">
             <div class="modal-dialog">

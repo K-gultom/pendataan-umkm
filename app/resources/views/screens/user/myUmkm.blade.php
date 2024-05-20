@@ -155,6 +155,7 @@
                         ${(data.data.status == 'Disetujui') && 'bg-success text-white'}
                         ${(data.data.status == 'Sedang Ditinjau') && 'bg-warning text-dark'}
                         ${(data.data.status == 'Tidak Disetujui') && 'bg-danger text-white'}
+                        ${(data.data.status == 'Tidak Aktif') ? 'bg-danger text-white' : ''}
                         ">
                           ${data.data.status}
                     </span>

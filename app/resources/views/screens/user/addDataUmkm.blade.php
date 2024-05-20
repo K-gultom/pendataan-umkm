@@ -178,7 +178,7 @@
                         <div class="col">
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="telp">No Telp/Whatsapp</label>
-                                <input value="{{old('telp')}}" type="number" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" placeholder="No Telp/whatsapp..." />
+                                <input value="{{old('telp', $getProfile->telp)}}" type="number" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" placeholder="No Telp/whatsapp..." />
                                 @error('telp')
                                     <div class="invalid-feedback">
                                     {{$message}}

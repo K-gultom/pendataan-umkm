@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('alamat_usaha');
             $table->string('telp');
             $table->string('foto_umkm');
-            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Sedang Ditinjau'])->nullable();
+            $table->enum('status', ['Disetujui', 'Tidak Disetujui', 'Sedang Ditinjau', 'Tidak Aktif'])->nullable();
             $table->timestamps();
         });
     }

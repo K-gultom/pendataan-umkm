@@ -19,6 +19,7 @@ class dashboard extends Controller
             return !is_null($user->foto_ktp);
         })->count();
 
+        $getAllUmkkm = umkm::all()->count();
         // dd($getUmkm);
 
         // GET DATA FROM MODEL UMKM
@@ -33,6 +34,7 @@ class dashboard extends Controller
                 'getRT',
                 'getUmkm',
                 'getUsersUmkm',
+                'getAllUmkkm',
                 'getStatusDisetujui',
                 'getStatusTidakDisetujui',
                 'getStatusSedangDitinjau',

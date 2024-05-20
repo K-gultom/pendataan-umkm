@@ -36,6 +36,15 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
         // Add Data
         Route::get('/admin/add', [AdminRTController::class, 'adminadd']);
         Route::post('/admin/add', [AdminRTController::class, 'adminadd_Store']);
+
+        // Edit Data
+        Route::get('/admin/edit/{id}', [AdminRTController::class, 'edit']);
+        Route::post('/admin/edit/{id}', [AdminRTController::class, 'edit_save']);
+
+        // LIHAT DATA ADMIN
+        Route::get('/admin/{id}', [AdminRTController::class, 'lihat_Data']);
+
+        Route::get('/admin/delete/{id}', [AdminRTController::class, 'delete_admin']);
         
 
     // SECTION DATA RT
@@ -47,7 +56,19 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
         Route::get('/rt/add', [AdminRTController::class, 'adminRT']);
         Route::post('/rt/add', [AdminRTController::class, 'adminRT_Store']);
 
-    // SECTION UMKM SETTING
+        //Edit Data
+        Route::get('/rt/edit/{id}', [AdminRTController::class, 'rt_edit']);
+        Route::post('/rt/edit/{id}', [AdminRTController::class, 'rt_edit_save']);
+
+        // Lihat Data Rt
+        Route::get('/rt/views/{id}', [AdminRTController::class, 'lihatDataRT']);
+
+        //Hapus Data
+        Route::get('/rt/delete/{id}', [AdminRTController::class, 'rt_delete']);
+
+
+
+        // SECTION UMKM SETTING
         //Jenis UMKM
         Route::get('/umkm/jenis', [UmkmController::class, 'jenis_UMKM_view']);
 
@@ -70,22 +91,32 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
 
 
         // get all umkm
-
         Route::get('/umkm/master', [AdminRTController::class, 'allUMKM']);
+        //  UBAH STATUS UMKM MENJADI TIDAK AKTIF OLEH ADMIN
+        Route::get('/umkm/master/{id}', [AdminRTController::class, 'ubah_Status_Tidak_Aktif']);
+        Route::post('/umkm/master/{id}', [AdminRTController::class, 'ubah_Status_Tidak_Aktif_save']);
 
-        // Untuk Reset Password
+        // Menu Data User UMKM
         Route::get('/umkm', [AdminRTController::class, 'user_umkm']);
+        
+        //GANTI PASSWORD
+        Route::get('/umkm/password/{id}', [AdminRTController::class, 'password_Ubah']);
+        Route::post('/umkm/password/{id}', [AdminRTController::class, 'password_Ubah_save']);
+        
+
+        // Ubah Status UMKM TIdak Aktif
+        // Route::get('/umkm', [AdminRTController::class, 'allUMKM']);
 
 });
 
-    
-Route::middleware(['auth:','ceklevel:admin,rt,'])->group(function () {
+
+Route::middleware(['auth:','ceklevel:admin,rt'])->group(function () {
    
     //SECTION RT ROUTING
         Route::get('/dashboard/rt', [AdminRTController::class, 'dashboardRt']);
         
    // DATA UMKM ALL
-        Route::get('/rt/ditinjau', [AdminRTController::class, 'ditinjau']);
+        Route::get('/rt/ditinjau', [AdminRTController::class, 'Ditinjau']);
 
         Route::get('/rt/disetujui', [AdminRTController::class, 'disetujui']);
 

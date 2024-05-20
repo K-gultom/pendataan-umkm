@@ -11,14 +11,8 @@
     <h4 class="mb-2">Data UMKM</h4>
     <nav aria-label="breadcrumb" class="mb-1">
         <ol class="breadcrumb">
-            @if ($umkmData->status == 'Sedang Ditinjau')
-                <li class="breadcrumb-item"><a href="{{url('/rt/ditinjau')}}" class="text-decoration-none">Data Sedang Ditinjau</a></li>
-            @elseif($umkmData->status == 'Disetujui') 
-                <li class="breadcrumb-item"><a href="{{url('/rt/disetujui')}}" class="text-decoration-none">Data Disetujui</a></li>
-            @elseif($umkmData->status == 'Tidak Disetujui')   
-                <li class="breadcrumb-item"><a href="{{url('/rt/tidak/disetujui')}}" class="text-decoration-none">Data Tidak Disetujui</a></li>
-            @endif
-            <li class="breadcrumb-item active" aria-current="page">Edit Data</li>
+            <li class="breadcrumb-item"><a href="{{url('/umkm/master')}}" class="text-decoration-none">Data UMKM</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ubah Status</li>
         </ol>
     </nav>
     <div class="card">
@@ -204,21 +198,9 @@
                             <div class="col mb-4">
                                 <label for="status">Ubah Status UMKM</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="statusSedangDitinjau" value="Sedang Ditinjau" {{ (old('status') == 'Sedang Ditinjau' || $umkmData->status == 'Sedang Ditinjau') ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="statusSedangDitinjau">
-                                        Sedang Ditinjau
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="statusDisetujui" value="Disetujui" {{ (old('status') == 'Disetujui' || $umkmData->status == 'Disetujui') ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="statusDisetujui">
-                                        Disetujui
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="statusTidakDisetujui" value="Tidak Disetujui" {{ (old('status') == 'Tidak Disetujui' || $umkmData->status == 'Tidak Disetujui') ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="statusTidakDisetujui">
-                                        Tidak Disetujui
+                                    <input class="form-check-input" type="radio" name="status" id="statusTidakAktif" value="Tidak Aktif">
+                                    <label class="form-check-label" for="statusTidakAktif">
+                                        Tidak Aktif
                                     </label>
                                 </div>
                                 @error('status')
@@ -244,13 +226,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Perbaharui Data <i class="bi bi-check-lg"></i></button>
-                    @if ($umkmData->status == 'Sedang Ditinjau')
-                        <a href="{{ url('/rt/ditinjau') }}" class="btn btn-danger btn-block">Cancel <i class="bi bi-x"></i></a>
-                    @elseif($umkmData->status == 'Disetujui')
-                        <a href="{{ url('/rt/disetujui') }}" class="btn btn-danger btn-block">Cancel <i class="bi bi-x"></i></a>    
-                    @elseif($umkmData->status == 'Tidak Disetujui')
-                        <a href="{{ url('/rt/tidak/disetujui') }}" class="btn btn-danger btn-block">Cancel <i class="bi bi-x"></i></a>    
-                    @endif
+                    <a href="{{ url('/umkm/master') }}" class="btn btn-danger btn-block">Cancel <i class="bi bi-x"></i></a>
 
 
                 </div>

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <h4 class="mb-3">Data UMKM Test</h4>
+        <h4 class="mb-3">Data UMKM</h4>
         <nav aria-label="breadcrumb" class="mb-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">Data UMKM Disetujui</li>
@@ -193,6 +193,7 @@
                             ${(data.data.status == 'Disetujui') ? 'bg-success text-white' : ''}
                             ${(data.data.status == 'Sedang Ditinjau') ? 'bg-warning text-dark' : ''}
                             ${(data.data.status == 'Tidak Disetujui') ? 'bg-danger text-white' : ''}
+                            ${(data.data.status == 'Tidak Aktif') ? 'bg-danger text-white' : ''}
                             ">
                             ${data.data.status}
                         </span>

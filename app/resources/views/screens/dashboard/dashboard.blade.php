@@ -59,10 +59,10 @@
             <div class="col-lg-3 col-md-3 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="rounded-3 p-2 text-light" style="background-color: #762A01">User Punya UMKM</h6>
+                        <h6 class="rounded-3 p-2 text-light" style="background-color: #762A01">Data UMKM</h6>
                         <div class="d-flex align-items-center justify-content-between">
                             <i class="bi bi-people-fill custom-icon-size"></i>
-                            <h4 class="mx-2">{{ $getUmkm }}</h4>
+                            <h4 class="mx-2">{{ $getAllUmkkm }}</h4>
                         </div>
                         <div class="text-end mt-2">
                             <a href="{{ url('/umkm') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>

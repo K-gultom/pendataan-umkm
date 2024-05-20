@@ -74,8 +74,7 @@ class AuthUMKM extends Controller
         return redirect('/');
     }
 
-    function logout()
-    {
+    function logout(){
 
         Auth::logout();
         return redirect('/');

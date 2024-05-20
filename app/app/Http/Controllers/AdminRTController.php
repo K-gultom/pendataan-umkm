@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class AdminRTController extends Controller
 {
@@ -52,6 +53,52 @@ class AdminRTController extends Controller
         return redirect('/admin')->with('message', 'Tambah data admin berhasil');
     }
 
+    public function edit($id){
+
+        $getData = User::where('id', $id)->where('level', 'admin')->first();
+        
+        // dd($getData);
+        return view('screens.admin.editAdmin', compact('getData'));
+    }
+    public function edit_save(Request $req, $id){
+        
+        $req->validate([
+            "name"  => 'required|max:50',
+            "jenis_kelamin" => 'required',
+            "alamat" => 'max:60',
+            "telp" => 'max:15',
+        ]);
+
+        $getData = User::find($id);
+        $getEmail = $getData->email;
+        // dd($getEmail);
+
+        $new                = User::find($id);
+        $new->name          = $req->name;
+        $new->jenis_kelamin = $req->jenis_kelamin;
+        $new->alamat        = $req->alamat;
+        $new->telp          = $req->telp;
+        $new->save();
+
+        // dd($new);
+
+        return redirect('/admin')->with('message', 'Edit data admin berhasil');
+    }
+
+    public function lihat_Data($id){
+        $getData = User::where('id', $id)->where('level', 'admin')->first();
+        
+        // dd($getData);
+        return view('screens.admin.lihatAdmin', compact('getData'));
+    }
+
+    function delete_admin($id){
+
+        $data = User::find($id);
+        $data ->delete();
+
+        return redirect()->back()->with('message', 'Data Berhasil Dihapus!!!');
+    }
     
     public function allUMKM(Request $r){
 
@@ -73,15 +120,69 @@ class AdminRTController extends Controller
 
     public function user_umkm(Request $r){
         
-        $getData = umkm::where('nama_usaha', 'like', "%{$r->search}%")
-            ->orWhere('name', 'like', "%{$r->search}%")
-            ->orWhere('nik', 'like', "%{$r->search}%")
-            ->with('getRT', 'getKategori', 'getUser')->paginate(20);
-        // dd($getData);
+        $getData = User::where('level', 'user')
+        ->where('name', 'like', "%{$r->search}%")
+        ->where('email', 'like', "%{$r->search}%")
+        ->paginate(20);
 
         // dd($getData);
         return view('screens.admin.userData.allUser', compact('getData'));
     }
+
+    public function password_Ubah($id){
+        
+        $getData = User::where('id', $id)->where('level', 'user')->first();
+        // dd($getData);
+        return view('screens.admin.userData.ubahPassword', compact('getData'));
+    }
+
+    public function password_Ubah_save(Request $req, $id){
+
+        $req->validate([
+            'password' => 'min:7',
+        ]);
+
+        $new = User::find($id);
+        $new->password = Hash::make($req->password);
+        $new->save();
+        
+        return redirect()->back()->with('message', 'Password Berhasil Diubah!!!');
+
+    }
+
+    public function ubah_Status_Tidak_Aktif($id){
+
+        $umkmData = Umkm::with(['getRT', 'getKategori', 'getUser'])->findOrFail($id);
+        $getRT = User::where('level', 'rt')->get();
+        $getKategori = kategori_umkm::get();
+        $getJenis = jenis_umkm::get();
+        // Mengambil semua data user yang berelasi dengan UMKM
+        $userData = User::with('getUmkm')->get();
+            // dd($getUser);
+            
+        return view('screens.admin.userData.ubahStatusTidakAktif', 
+            compact( 
+                'umkmData', 
+                'userData',
+                'getRT',
+                'getKategori',
+                'getJenis'
+            ));
+    }
+    public function ubah_Status_Tidak_Aktif_save(Request $req, $id){
+        $getRequest = $req->status;
+
+        $req->validate([
+            'status' => 'required',
+        ]);
+
+        $new = umkm::find($id);
+        $new->status = $req->status;
+        $new->save();
+
+         return redirect('/umkm/master')->with('message', 'UMKM DINONAKTIFKAN');
+    }
+
 
 
     // ================================================================================================
@@ -150,8 +251,62 @@ class AdminRTController extends Controller
         return redirect('/rt')->with('message', 'Tambah data RT berhasil');
     }
 
+    public function rt_edit($id){
 
-    public function ditinjau(Request $r) {
+        $getData = User::where('id', $id)->where('level', 'rt')->first();
+        
+        // dd($getData);
+        return view('screens.rt.editDataRt', compact('getData'));
+    }
+    public function rt_edit_save(Request $req, $id){
+        // Temukan user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Validasi input
+        $req->validate([
+            'name' => 'required|max:50',
+            'wilayah_rt' => [
+                'required',
+                'max:4',
+                'numeric',
+                Rule::unique('users', 'wilayah_rt')->ignore($user->id),
+            ],
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required|max:60',
+            'telp' => 'required|max:15',
+        ]);
+
+        // Update data user
+        $user->name = $req->name;
+        $user->wilayah_rt = $req->wilayah_rt;
+        $user->jenis_kelamin = $req->jenis_kelamin;
+        $user->alamat = $req->alamat;
+        $user->telp = $req->telp;
+        $user->save();
+
+        return redirect('/rt')->with('message', 'Update data RT berhasil');
+    }
+
+    public function lihatDataRT($id){
+
+        $getData = User::where('id', $id)->where('level', 'rt')->first();
+        
+        // dd($getData);
+        return view('screens.rt.lihatDataRt', compact('getData'));
+    }
+
+    public function rt_delete($id){
+
+        $data = User::find($id);
+        $data ->delete();
+
+        return redirect()->back()->with('message', 'Data Berhasil Dihapus!!!');
+    }
+
+
+
+    
+    public function Ditinjau(Request $r) {
        
         $getData = umkm::where('status', 'Sedang Ditinjau')
             ->where('rt_id', Auth::user()->id)
@@ -161,7 +316,6 @@ class AdminRTController extends Controller
                 // dd($getData);
     
         return view('screens.rt.cekUmkm.umkmDitinjau', compact( 'getData'));
-
     }
 
     public function disetujui(Request $r) {
@@ -192,10 +346,6 @@ class AdminRTController extends Controller
     }
     
     public function ubahStatus($id){
-
-        // $umkmData = umkm::find($id)
-        //     ->with('getRT', 'getKategori')
-        //     ->get();
 
         $umkmData = Umkm::with(['getRT', 'getKategori', 'getUser'])->findOrFail($id);
         $getRT = User::where('level', 'rt')->get();

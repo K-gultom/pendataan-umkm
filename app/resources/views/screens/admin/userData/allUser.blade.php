@@ -63,10 +63,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Pemilik</th>
-                            <th>Nama UMKM</th>
-                            <th class="text-center">Email</th>
-                            <th class="text-center">NIK</th>
+                            <th>Nama User</th>
+                            <th>Email</th>
+                            <th>Telp</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -77,15 +76,14 @@
                                     {{ (($getData->currentPage() - 1) * $getData->perPage()) + $loop->iteration }}
                                 </td>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ $item->nama_usaha }}</td>
-                                <td class="text-center">{{ $item->getUser->email}}</td>
-                                <td class="text-center">{{ $item->nik }}</td>
+                                <td>{{ $item->email}}</td>
+                                @if ($item->telp > 0)
+                                    <td>{{ $item->telp }}</td>
+                                @else
+                                    <td>Data Belum Diperbaharui User</td>
+                                @endif
                                 <td class="text-center">
-                                    {{-- <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
-                                        <i class="bi bi-eye"></i> Lihat Data
-                                    </a> --}}
-
-                                    <a href="" class="btn btn-warning">Ganti Password</a>
+                                    <a href="{{ url('/umkm/password') }}/{{ $item->id }}" class="btn btn-warning">Ganti Password <i class="bi bi-key"></i></a>
                                 </td>
                             </tr>
                         @endforeach
@@ -96,73 +94,11 @@
         </div>
     </div>
     
-    
-    
-    
-    {{-- MODAL --}}
+    <style>
+        .rotate {
+            transform: rotate(90deg); /* Memutar ikon 90 derajat */
+        }
 
-    {{-- <div class="section">
-        <div class="modal fade" id="statusUmkm" tabindex="-1" aria-labelledby="statusUmkmLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="statusUmkmLabel">Data UMKM --- <span id="namaUsahaStatus"></span></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Nama Pemilik UMKM : <strong id="namaStatus"></strong></p>
-                        <p>Nomor Induk Kependudukan : <strong id="nikStatus"></strong></p>
-                        <p>Alamat Pemilik: <strong id="alamatStatus"></strong></p>
-                        <p>RT : <strong id="rtStatus"></strong></p>
-                        <p>Jenis UMKM : <strong id="jenisStatus"></strong></p>
-                        <p>Kategori UMKM : <strong id="namaKategoriStatus"></strong></p>
-                        <p>Nama Usaha : <strong id="namaUsahaBodyStatus"></strong></p>
-                        <p>Alamat Usaha : <strong id="alamatUsahaStatus"></strong></p>
-                        <p>No. Telepon : <strong id="telpStatus"></strong></p>
-                        <p>Status UMKM: <span id="statusContainerStatus"></span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // FOR SHOW DATA
-        const viewModalStatus = document.querySelector('#statusUmkm');
-        viewModalStatus.addEventListener('show.bs.modal', (e) => {
-            let button = e.relatedTarget;
-            let id = button.getAttribute('data-id');
-
-            fetch('/api/view/umkm/' + id).then(response => response.json()).then(data => {
-                if (data) {
-                    document.getElementById('namaStatus').textContent = data.data.name;
-                    document.getElementById('nikStatus').textContent = data.data.nik;
-                    document.getElementById('alamatStatus').textContent = data.data.alamat_pemilik;
-                    document.getElementById('rtStatus').textContent = data.data.get_r_t.wilayah_rt;
-                    document.getElementById('jenisStatus').textContent = data.data.get_jenis.jenis_umkm;
-                    document.getElementById('namaKategoriStatus').textContent = data.data.get_kategori.nama_kategori;
-                    document.getElementById('namaUsahaStatus').textContent = data.data.nama_usaha;
-                    document.getElementById('namaUsahaBodyStatus').textContent = data.data.nama_usaha;
-                    document.getElementById('alamatUsahaStatus').textContent = data.data.alamat_usaha;
-                    document.getElementById('telpStatus').textContent = data.data.telp;
-                    document.getElementById('statusContainerStatus').innerHTML = `
-                        <span id="status" class="badge rounded-pill
-                            ${(data.data.status == 'Disetujui') ? 'bg-success text-white' : ''}
-                            ${(data.data.status == 'Sedang Ditinjau') ? 'bg-warning text-dark' : ''}
-                            ${(data.data.status == 'Tidak Disetujui') ? 'bg-danger text-white' : ''}
-                            ">
-                            ${data.data.status}
-                        </span>
-                    `;
-                } else {
-                    console.error('No data found for the given ID.');
-                }
-            }).catch(error => {
-                console.error('Error fetching data:', error);
-            });
-        });
-    </script> --}}
+    </style>
+    
 @endsection

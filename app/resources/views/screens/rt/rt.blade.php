@@ -75,13 +75,13 @@
                                 <td>{{$item->email}} </td>
                                 <td>{{$item->telp}} </td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-success btn-sm">
+                                    <a href="{{ url('/rt/views') }}/{{ $item->id }}" class="btn btn-success btn-sm">
                                         <i class="bi bi-eye"></i> Lihat Data
                                     </a>
-                                    <a href="" class="btn btn-warning btn-sm">
+                                    <a href="{{ url('/rt/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i> Edit
                                     </a>
-                                    <a href="" class="btn btn-danger btn-sm" 
+                                    <a href="{{ url('/rt/delete') }}/{{ $item->id }}" class="btn btn-danger btn-sm" 
                                         onclick="return confirm('Hapus Data ???');">
                                         <i class="bi bi-trash"></i> Delete
                                     </a>

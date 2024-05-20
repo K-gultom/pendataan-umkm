@@ -45,7 +45,7 @@
                         <strong>Data</strong> UMKM
                     </div>
                     <div class="w-100 text-end">
-                        <a href="{{url('/umkm')}}" class="btn btn-primary">
+                        <a href="{{url('/umkm/master')}}" class="btn btn-primary">
                             Refresh Data <i class="bi bi-arrow-clockwise"></i>
                         </a>
                     </div>
@@ -68,6 +68,7 @@
                             <th class="text-center">Jenis UMKM</th>
                             <th class="text-center">Kategori UMKM</th>
                             <th class="text-center">RT</th>
+                            <th class="text-center">Foto UMKM</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -83,8 +84,17 @@
                                 <td class="text-center">{{ $item->getKategori->nama_kategori }}</td>
                                 <td class="text-center">{{ $item->getRT->wilayah_rt }}</td>
                                 <td class="text-center">
+                                    <a href="{{ url('/assets/images/umkm/'.$item->foto_umkm) }}" target="_blank">
+                                        <img src="{{ url('/assets/images/umkm/'.$item->foto_umkm) }}" class="img-fluid rounded border border-primary" alt="Foto UMKM" width="40px">
+                                        {{-- <p class="btn btn-info btn-sm">Lihat Foto</p> --}}
+                                    </a>    
+                                </td>
+                                <td class="text-center">
                                     <a id="viewModalStatus" href="" data-id="{{ $item->id }}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#statusUmkm">
                                         <i class="bi bi-eye"></i> Lihat Data
+                                    </a>
+                                    <a href="{{ url('/umkm/master') }}/{{ $item->id }}" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-pencil"></i> Non-Aktifkan UMKM
                                     </a>
                                 </td>
                             </tr>
@@ -148,6 +158,7 @@
                             ${(data.data.status == 'Disetujui') ? 'bg-success text-white' : ''}
                             ${(data.data.status == 'Sedang Ditinjau') ? 'bg-warning text-dark' : ''}
                             ${(data.data.status == 'Tidak Disetujui') ? 'bg-danger text-white' : ''}
+                            ${(data.data.status == 'Tidak Aktif') ? 'bg-danger text-white' : ''}
                             ">
                             ${data.data.status}
                         </span>

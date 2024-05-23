@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-5 col-md-5 mb-4">
+            <div class="col-lg-4 col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Status dari RT</h3>
@@ -78,6 +78,17 @@
                         <div class="d-flex align-items-center">
                             <i class="bi bi-shop w-100 custom-icon-size"></i>
                             <h4 class="mx-2">{{ $sedangDitinjau }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="rounded-3 p-2 text-light" style="background-color: red">Tidak Aktif</h6>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-shop w-100 custom-icon-size"></i>
+                            <h4 class="mx-2">{{ $tidakAktif }}</h4>
                         </div>
                     </div>
                 </div>

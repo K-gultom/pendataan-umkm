@@ -101,22 +101,21 @@ class AdminRTController extends Controller
     }
     
     public function allUMKM(Request $r){
-
         $dataUmkm = umkm::where('nama_usaha', 'like', "%{$r->search}%")
             ->orWhere('name', 'like', "%{$r->search}%")
             ->orWhere('nik', 'like', "%{$r->search}%")
-            ->with('getRT', 'getKategori')->paginate(20);
-        
+            ->with('getRT', 'getKategori')
+            ->orderBy('created_at', 'desc') // Menambahkan orderBy untuk mengurutkan berdasarkan created_at
+            ->paginate(20);
+
         if ($dataUmkm->isEmpty()) {
-
-          $noDataMessage = 'Maaf, Data UMKM Tidak Tersedia!!!';
-          return view('screens.admin.umkmData', compact( 'dataUmkm', ));
-
+            $noDataMessage = 'Maaf, Data UMKM Tidak Tersedia!!!';
+            return view('screens.admin.umkmData', compact('dataUmkm'));
         } else {
-          return view('screens.admin.umkmData', compact('dataUmkm'));
-
+            return view('screens.admin.umkmData', compact('dataUmkm'));
         }
     }
+
 
     public function user_umkm(Request $r){
         

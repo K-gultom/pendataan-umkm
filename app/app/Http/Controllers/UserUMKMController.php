@@ -22,11 +22,14 @@ class UserUMKMController extends Controller
 
         $sedangDitinjau = Umkm::where('status', 'Sedang Ditinjau')->where('user_id', $userId)->count();
 
+        $tidakAktif = Umkm::where('status', 'Tidak Aktif')->where('user_id', $userId)->count();
+
         return view('screens.user.home',  
         compact(
             'disetujui', 
             'tidakDisetujui', 
-            'sedangDitinjau'
+            'sedangDitinjau',
+            'tidakAktif',
             )
         );
 
@@ -35,7 +38,10 @@ class UserUMKMController extends Controller
     public function myUmkm() {
 
         $getProfile = Auth::user();
-        $getUmkm = umkm::with('getRT', 'getKategori')->where('user_id', Auth::user()->id)->get();
+        $getUmkm = umkm::with('getRT', 'getKategori')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
         
         if ($getUmkm->isEmpty()) {
 

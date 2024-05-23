@@ -26,7 +26,9 @@ class dashboard extends Controller
         $getStatusDisetujui = umkm::where('status', 'Disetujui')->count();
         $getStatusTidakDisetujui = umkm::where('status', 'Tidak Disetujui')->count();
         $getStatusSedangDitinjau = umkm::where('status', 'Sedang Ditinjau')->count();
+        $getStatusTidakAktif = umkm::where('status', 'Tidak Aktif')->count();
 
+        // dd($getStatusTidakAktif);
 
         return view('screens.dashboard.dashboard',
             compact(
@@ -38,6 +40,7 @@ class dashboard extends Controller
                 'getStatusDisetujui',
                 'getStatusTidakDisetujui',
                 'getStatusSedangDitinjau',
+                'getStatusTidakAktif',
                 )
         );
     }

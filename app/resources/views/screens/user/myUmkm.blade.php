@@ -80,13 +80,11 @@
                                         <a id="viewModal" href="" data-id="{{ $item->id }}" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#lihatdata">
                                             <i class="bi bi-eye"></i> Status UMKM
                                         </a>
-                                        {{-- <a href="{{ url('/umkm/view') }}/{{ $item->id }}" class="btn btn-success btn-sm">
-                                            <i class="bi bi-eye"></i> Lihat Data
-                                        </a> --}}
-                                        </a>
-                                        <a href="{{ url('/umkm/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm">
-                                            <i class="bi bi-pencil"></i> Edit Data
-                                        </a>
+                                        @if ($item->status != 'Tidak Aktif')
+                                            <a href="{{ url('/umkm/edit') }}/{{ $item->id }}" class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil"></i> Edit Data
+                                            </a>
+                                        @endif
                                         <a href="{{url('/umkm/del')}}/{{ $item->id }}" class="btn btn-danger btn-sm" 
                                             onclick="return confirm('Hapus Data ???');">
                                             <i class="bi bi-trash"></i> Delete

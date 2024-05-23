@@ -65,7 +65,7 @@
                             <h4 class="mx-2">{{ $getAllUmkkm }}</h4>
                         </div>
                         <div class="text-end mt-2">
-                            <a href="{{ url('/umkm') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
+                            <a href="{{ url('/umkm/master') }}" class="btn btn_info">Lihat Data <i class="bi bi-eye"></i></a>
                         </div>
                     </div>
                 </div>
@@ -103,6 +103,17 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <i class="bi bi-shop custom-icon-size"></i>
                             <h4 class="mx-2">{{ $getStatusTidakDisetujui }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="rounded-3 p-2 text-light" style="background-color: red">UMKM Tidak Aktif</h6>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <i class="bi bi-shop custom-icon-size"></i>
+                            <h4 class="mx-2">{{ $getStatusTidakAktif }}</h4>
                         </div>
                     </div>
                 </div>

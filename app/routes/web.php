@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminRTController;
 use App\Http\Controllers\AuthUMKM;
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\printController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\UserUMKMController;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +107,11 @@ Route::middleware(['auth:','ceklevel:admin'])->group(function () {
 
         // Ubah Status UMKM TIdak Aktif
         // Route::get('/umkm', [AdminRTController::class, 'allUMKM']);
+
+        Route::get('/surat-keterangan', [printController::class, 'surat_keterangan']); 
+
+        Route::get('/cetak-domisili/{id}', [printController::class, 'domisili_umkm_print']); 
+        Route::get('/cetak-pinjaman/{id}', [printController::class, 'pinjaman_umkm_print']); 
 
 });
 

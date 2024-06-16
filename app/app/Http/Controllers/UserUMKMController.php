@@ -248,9 +248,13 @@ class UserUMKMController extends Controller
         $getIdUser = Auth::user()->id;
 
         $req->validate([
-            "jenis_kelamin" => 'required',
             "alamat" => 'required|max:60',
+            "tempat_lahir" => 'required|min:3',
+            "tgl_lahir" => 'required|date',
             "telp" => 'required|max:15',
+            "jenis_kelamin" => 'required',
+            "kewarganegaraan" => 'required',
+            "agama" => 'required',
             'foto_ktp' => 'required|mimes:jpg,jpeg,png',
             'foto_kk' => 'required|mimes:jpg,jpeg,png',
         ]);
@@ -264,9 +268,13 @@ class UserUMKMController extends Controller
         $foto_kk -> move('assets/images/kk',$new_photo_name_kk);
 
         $new = User::find($getIdUser);
-        $new->jenis_kelamin = $req->jenis_kelamin;
         $new->alamat = $req->alamat;
+        $new->tempat_lahir = $req->tempat_lahir;
+        $new->tgl_lahir = $req->tgl_lahir;
         $new->telp = $req->telp;
+        $new->jenis_kelamin = $req->jenis_kelamin;
+        $new->kewarganegaraan = $req->kewarganegaraan;
+        $new->agama = $req->agama;
         $new->foto_ktp = $new_photo_name_ktp;
         $new->foto_kk = $new_photo_name_kk;
         $new->save();

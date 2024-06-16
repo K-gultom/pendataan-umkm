@@ -104,7 +104,13 @@
                         <a href="{{ url('/umkm/kategori') }}" class="dropdown-item dropHover">Kategori UMKM</a>
                     </div>
                 </div>
+
                 <a href="{{ url('/umkm/master') }}" class="side nav-item nav-link active text-light"><i class="bi bi-database"></i> Data UMKM</a>
+
+                <a href="{{ url('/surat-keterangan') }}" class="side nav-item nav-link active text-light"><i class="bi bi-envelope"></i> Surat Keterangan</a>
+
+
+                
 
             @endif
 

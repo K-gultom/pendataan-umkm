@@ -133,7 +133,7 @@
 
         <div class="container">
             <center>
-                <h3><u>SURAT KETERANGAN</u></h3>Nomor: 145 / {{ $getData->id }} /18.1002/2024
+                <h3><u>SURAT KETERANGAN</u></h3>Nomor: 145 /&nbsp; &nbsp; &nbsp; &nbsp;/18.1002/2024
             </center>
         </div>
 
